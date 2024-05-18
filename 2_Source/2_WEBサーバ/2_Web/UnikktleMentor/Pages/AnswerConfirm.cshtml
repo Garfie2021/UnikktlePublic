@@ -1,0 +1,100 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model UnikktleMentor.Pages.Home.AnswerConfirm
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="Fx5 ">
+    @*
+        回答内容
+    *@
+    <h5><b>@Localizer["1"]</b></h5>
+</div>
+
+<p></p>
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<form id="user-setting-form" method="post">
+    <div id="s">
+        <p></p>
+
+        <table class="Fx5 table">
+            <thead class="Fx6">
+                <tr>
+                    @*
+                        設問
+                    *@
+                    <th scope="col" width="250">@Localizer["2"]</th>
+
+                    @*
+                        回答
+                    *@
+                    <th scope="col" width="100">@Localizer["3"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Question_AnswerList)
+                {
+                    <tr>
+                        <td>
+                            @{
+                                var str10 = (item.AnswerNo + 1).ToString() + "." + item.Setsumon;
+                                <p>@Html.Raw(str10)</p>
+                            }
+                        </td>
+                        <td>
+                            <p>@Html.DisplayFor(x => item.Answer)</p>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <p></p>
+    <p><hr></p>
+    <p></p>
+
+    <div class="Fx5 ">
+        @*
+            性別：
+        *@
+        <p>@Localizer["4"] @Model._GenderName</p>
+
+        @*
+            職業：
+        *@
+        <p>@Localizer["5"] @Model._CareerName</p>
+
+        @*
+            自身を取り巻く最近の環境変化
+        *@
+        <h5><b>@Localizer["6"]</b></h5>
+
+        <p></p>
+
+        <p>@Model._AnswerDetailSupplement.RecentHappenings</p>
+
+        <p></p>
+
+        @* ユーザーに見せない方が良い。時間がかかった場合にやり直しされる可能性がある。
+            <label>回答時間[ @Model.回答時間_分.Hours 時間 @Model.回答時間_分.Minutes 分 @Model.回答時間_分.Seconds 秒 ]</label>*@
+    </div>
+
+    <p></p>
+    <p><hr></p>
+    <p></p>
+
+    @*
+        戻る
+    *@
+    <button id="update-profile-button" type="submit" class="btn btn-primary" asp-page-handler="Back">@Localizer["7"]</button>
+
+    <br>
+
+</form>
+

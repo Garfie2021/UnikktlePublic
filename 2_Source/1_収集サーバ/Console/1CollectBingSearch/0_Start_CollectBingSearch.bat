@@ -1,0 +1,1 @@
+D:\Unikktele\1CollectBingSearch\CollectBingSearch.exe D:\Unikktele\config\appsettings.json

@@ -1,0 +1,84 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model FeedbackModel
+@*Feedback*@
+<h3>@Localizer["1"]</h3>
+
+<br>
+
+<p>
+    @*問題点やバグ、ご意見ご感想などあればご連絡下さい。*@
+    @Localizer["2"]<br>
+    @*今後の運用に生かさせて頂きます。*@
+    @Localizer["3"]
+</p>
+
+<p></p>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<div class="row">
+    <div class="col-md-6">
+        <form id="user-setting-form" method="post">
+            <div class="form-group">
+                @*Category*@
+                <label>@Localizer["4"]</label>
+                <select asp-for="Input.FeedbackCategory" class="form-control">
+                    @*問題点・バグ*@
+                    <option value="1">@Localizer["5"]</option>
+                    @*意見・感想*@
+                    <option value="2">@Localizer["6"]</option>
+                    @*その他*@
+                    <option value="3">@Localizer["7"]</option>
+                </select>
+            </div>
+            <div class="form-group">
+                @*subject*@
+                <label>@Localizer["8"]</label>
+                @*100文字まで*@
+                <input asp-for="Input.Subject" type="text" class="form-control" placeholder="@Localizer["9"]" />
+            </div>
+            <div class="form-group">
+                @*Text*@
+                <label>@Localizer["10"]</label>
+                @*500文字まで*@
+                <textarea asp-for="Input.Text" type="text" class="form-control" rows="5" placeholder="@Localizer["11"]"></textarea>
+            </div>
+
+            @*OK*@
+            <button id="update-profile-button" type="submit" class="btn btn-primary">@Localizer["12"]</button>
+        </form>
+
+        @if (Model.FeedbackHistory != null && Model.FeedbackHistory.Count() > 0)
+        {
+            <p></p>
+            @*Most recent history*@
+            <h3>@Localizer["13"]</h3>
+            <table class="Fx5 Nowrap table">
+                <thead class="Fx6">
+                    <tr>
+                        <th scope="col">#</th>
+                        @*Category*@
+                        <th scope="col">@Localizer["14"]</th>
+                        @*Subject*@
+                        <th scope="col">@Localizer["15"]</th>
+                        @*<th scope="col">Text</th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var feedback in Model.FeedbackHistory)
+                    {
+                        <tr>
+                            <th scope="row">@feedback.Id</th>
+                            <td>@feedback.Category.ToString()</td>
+                            <td>@feedback.Subject</td>
+                            @*<td>@feedback.Text</td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

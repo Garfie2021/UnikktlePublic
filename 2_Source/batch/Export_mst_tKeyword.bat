@@ -1,0 +1,1 @@
+bcp UnikktleCollect.mst.tKeyword OUT D:\Unikktele\Work\mst_tKeyword.tsv -c -t \t -r \r\n -S xxx -U sa -P xxx

@@ -1,0 +1,9 @@
+﻿@using System.Web
+@model Unikktle.Models.StatusViewModel
+
+@{
+    var statusMessageClass = Model.StatusMessage.StartsWith("Error") ? "danger" : "success";
+    <div class="alert alert-@statusMessageClass alert-dismissible" role="alert">
+        @Html.Raw(HttpUtility.HtmlEncode(Model.StatusMessage).Replace("\n", "<br/>"))
+    </div>
+}

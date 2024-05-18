@@ -1,0 +1,34 @@
+USE [UnikktleWeb]
+GO
+
+/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 2019/04/28 19:25:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[AspNetUserLogins]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[AspNetUserLogins](
+	[LoginProvider] [nvarchar](128) COLLATE Japanese_CI_AS NOT NULL,
+	[ProviderKey] [nvarchar](128) COLLATE Japanese_CI_AS NOT NULL,
+	[ProviderDisplayName] [nvarchar](max) COLLATE Japanese_CI_AS NULL,
+	[UserId] [nvarchar](450) COLLATE Japanese_CI_AS NOT NULL,
+ CONSTRAINT [PK_AspNetUserLogins] PRIMARY KEY CLUSTERED 
+(
+	[LoginProvider] ASC,
+	[ProviderKey] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+ALTER AUTHORIZATION ON [dbo].[AspNetUserLogins] TO  SCHEMA OWNER 
+GO
+
+/****** Object:  Statistic [IX_AspNetUserLogins_UserId]    Script Date: 2019/04/28 19:25:58 ******/
+if  exists (select * from sys.stats where name = N'IX_AspNetUserLogins_UserId' and object_id = object_id(N'[dbo].[AspNetUserLogins]'))
+UPDATE STATISTICS [dbo].[AspNetUserLogins]([IX_AspNetUserLogins_UserId]) WITH STATS_STREAM = 0x0100000003000000000000000000000030128B5B0000000070000000000000000000000000000000E7030000E7000000840300000000000010D0000000000000E7030000E7000000000100000000000010D0000000000000E7030000E7000000000100000000000010D0000000000000, ROWCOUNT = 0, PAGECOUNT = 0
+GO
+/****** Object:  Statistic [PK_AspNetUserLogins]    Script Date: 2019/04/28 19:25:58 ******/
+if  exists (select * from sys.stats where name = N'PK_AspNetUserLogins' and object_id = object_id(N'[dbo].[AspNetUserLogins]'))
+UPDATE STATISTICS [dbo].[AspNetUserLogins]([PK_AspNetUserLogins]) WITH STATS_STREAM = 0x0100000002000000000000000000000072B5B1C80000000058000000000000000000000000000000E7030000E7000000000100000000000010D0000000000000E7030000E7000000000100000000000010D0000000000000, ROWCOUNT = 0, PAGECOUNT = 0
+GO

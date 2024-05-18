@@ -1,0 +1,1 @@
+D:\Unikktele\1CollectYahooSearch\CollectYahooSearch.exe D:\Unikktele\config\appsettings.json

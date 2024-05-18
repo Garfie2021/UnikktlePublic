@@ -1,0 +1,72 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model AdverRelationWordEditModel
+
+@*Adver Relation Word Edit*@
+<h3>@Localizer["1"]</h3>
+
+<br>
+
+<p></p>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<div class="row">
+    <div class="col-md-6">
+
+        <form id="user-setting-form" method="post">
+            <div class="form-group">
+                @*Word*@
+                <label>@Localizer["2"]</label>
+
+                @*Select*@
+                <button class="btn btn-primary" asp-page-handler="RelationWordSelect">@Localizer["3"]</button>
+
+                @*100文字まで*@
+                <input asp-for="Input.Word" type="text" class="form-control" ReadOnly="readonly" placeholder="@Localizer["4"]" />
+            </div>
+
+            @*競合するクリック単価を表示*@
+            <button class="btn btn-primary" asp-page-handler="CompetingUnitPricesSelect">@Localizer["5"]</button>
+
+            <div class="form-group">
+                @*Cost per click*@
+                <label>@Localizer["6"]</label>
+
+                @*1クリックあたりの単価(消費クレジット数)。単価が高いほど広告が上位に表示されます。*@
+                <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="@Localizer["6"]" data-content="@Localizer["8"]">
+                    <svg class="octicon octicon-question" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M6 10h2v2H6v-2zm4-3.5C10 8.64 8 9 8 9H6c0-.55.45-1 1-1h.5c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5V7H4c0-1.5 1.5-3 3-3s3 1 3 2.5zM7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7z"></path>
+                    </svg>
+                </a>
+
+                @*4桁まで*@
+                <input asp-for="Input.ClickCost" type="text" class="form-control" placeholder="@Localizer["9"]" />
+            </div>
+
+            <p></p>
+            <hr class="s1">
+            <p></p>
+
+            @*戻る*@
+            <button class="btn btn-primary" asp-page-handler="Back">@Localizer["10"]</button>
+            @*OK*@
+            <button id="update-profile-button" type="submit" class="btn btn-primary">@Localizer["11"]</button>
+        </form>
+
+    </div>
+</div>
+
+@*
+    <partial name="/JavaScript/Popover.cshtml" />
+*@
+
+<environment include="Development">
+    <script src="/js/Page_Popover.js" asp-append-version="true"></script>
+</environment>
+<environment exclude="Development">
+    <script src="/js/Page_Popover.min.js" asp-append-version="true"></script>
+</environment>
+

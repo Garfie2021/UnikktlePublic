@@ -1,0 +1,29 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model LogoutModel
+@*
+    ここが日本語/[英語]のマスター。ここに纏めてからresxに展開する。
+
+     [英語]
+      1 Log out
+      2 You have successfully logged out of the application.
+
+     [日本語]
+      1
+      2
+*@
+
+@*
+    ログアウト
+*@
+<h1>@Localizer["1"]</h1>
+
+@*
+    アプリケーションから正常にログアウトしました。
+*@
+<p>@Localizer["2"]</p>
+
+<p></p>
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>

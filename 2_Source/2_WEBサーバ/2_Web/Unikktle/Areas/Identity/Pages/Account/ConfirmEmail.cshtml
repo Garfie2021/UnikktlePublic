@@ -1,0 +1,15 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model ConfirmEmailModel
+
+@*Confirm email*@
+<h1>@Localizer["1"]</h1>
+
+@*Thank you for confirming your email.*@
+<p>@Localizer["2"]</p>
+
+<p></p>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>

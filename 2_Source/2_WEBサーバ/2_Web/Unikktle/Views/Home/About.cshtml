@@ -1,0 +1,65 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model Unikktle.Models.AboutViewModel
+
+@{
+    Layout = "/Views/Shared/_LayoutAbout.cshtml";
+}
+
+<div class="Fx5">
+    @*
+        xxx について
+        <h2>@Localizer["1"]</h2>
+    *@
+
+    <h4>Unikktle Keyword</h4>
+
+    @* Unikktle.comは、知りたい事に関係するキーワードを見つけ、インターネット検索を手助けするインターネットリサーチ支援システムです。 *@
+    <p>@Localizer["2"]</p>
+
+    @*
+        関連性の高いキーワードは上位に表示され、気になるキーワードをBing/Google/Yahoo検索することで、調査の効率を上げられます。
+        これまでに分析されたキーワードの数は 000000 。これらのキーワードは、何から調べたらよいか全く分からない時に、特に有用な示唆となります。
+
+    *@
+    <p>@Localizer["3"] @Model.KeywordCount @Localizer["4"]</p>
+
+    @* Unikktle.comのキーワード検索画面と関連キーワード画面には、キーワードに連動した無料広告/有料広告を、誰でも掲載できます。 *@
+    <p>@Localizer["6"]</p>
+
+    @* 長い文を読みたくない時はUnikktle Keyword。 *@
+    <p>@Localizer["5"]</p>
+
+
+
+    <br>
+
+    <h4>Unikktle Mind</h4>
+
+    @* Unikktle Mind は、簡単な記法でマインドマップやモデルを作成し共有できる、モデル共有システムです。 *@
+    <p>@Localizer["7"]</p>
+
+    <br>
+    <br>
+
+
+    <h4><a href="https://mentor.xxx/">Unikktle Mentor</a></h4>
+
+    @* Unikktle Mentor は、簡単な記法でマインドマップやモデルを作成し共有できる、モデル共有システムです。 *@
+    <p>@Localizer["8"]</p>
+
+    <br>
+    <br>
+
+    <h4><a href="https://blog.xxx/">Unikktle Blog</a></h4>
+
+    <p>Unikktle 開発者が更新しているブログ。</p>
+
+    <br>
+    <br>
+
+
+    <p>Copyright © 2019 xxx. All Rights Reserved.</p>
+    <p>Version.2.1.6</p>
+
+</div>

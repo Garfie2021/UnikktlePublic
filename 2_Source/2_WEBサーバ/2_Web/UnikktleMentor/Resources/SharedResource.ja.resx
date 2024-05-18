@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="1" xml:space="preserve">
+    <value>エラーが発生しました。</value>
+  </data>
+  <data name="10" xml:space="preserve">
+    <value>登録が完了しました</value>
+  </data>
+  <data name="100" xml:space="preserve">
+    <value>列が足りていません。 [{0}]</value>
+  </data>
+  <data name="101" xml:space="preserve">
+    <value>1列目に値がありません。 [{0}]</value>
+  </data>
+  <data name="102" xml:space="preserve">
+    <value>2列目に値がありません。 [{0}]</value>
+  </data>
+  <data name="103" xml:space="preserve">
+    <value>1列目が数値ではありません。 [{0}]</value>
+  </data>
+  <data name="104" xml:space="preserve">
+    <value>予期せぬエラーが発生しました。 [{0}]</value>
+  </data>
+  <data name="105" xml:space="preserve">
+    <value>3列目に値がありません。 [{0}]</value>
+  </data>
+  <data name="106" xml:space="preserve">
+    <value>3列目が数値ではありません。 [{0}]</value>
+  </data>
+  <data name="107" xml:space="preserve">
+    <value>2列目が関係記号（&gt;/-）ではありません。 [{0}]</value>
+  </data>
+  <data name="108" xml:space="preserve">
+    <value>1列目がユニークではありません。 [{0}]</value>
+  </data>
+  <data name="12" xml:space="preserve">
+    <value>削除が完了しました</value>
+  </data>
+  <data name="13" xml:space="preserve">
+    <value>送信が完了しました</value>
+  </data>
+  <data name="14" xml:space="preserve">
+    <value>プロファイルを更新しました</value>
+  </data>
+  <data name="15" xml:space="preserve">
+    <value>ユーザー設定を更新しました</value>
+  </data>
+  <data name="2" xml:space="preserve">
+    <value>男性</value>
+  </data>
+  <data name="20" xml:space="preserve">
+    <value>無料広告は最大1つまで登録できます。既に1つ登録されています。</value>
+  </data>
+  <data name="21" xml:space="preserve">
+    <value>保有Creditが0以下です。有効な有料広告は登録できません。</value>
+  </data>
+  <data name="22" xml:space="preserve">
+    <value>無料広告は最大1つまで登録できます。既に1つ登録されています。</value>
+  </data>
+  <data name="23" xml:space="preserve">
+    <value>保有Creditが0以下です。有料広告を有効にできません。</value>
+  </data>
+  <data name="24" xml:space="preserve">
+    <value>ログイン失敗が連続した為、アカウントはロックされました。暫く経ってからログインして下さい。</value>
+  </data>
+  <data name="25" xml:space="preserve">
+    <value>無効なログイン試行です。</value>
+  </data>
+  <data name="26" xml:space="preserve">
+    <value>診断できるのは1ヵ月に1回までです。\r\n最後に診断した日時：</value>
+  </data>
+  <data name="27" xml:space="preserve">
+    <value>診断できるのは1ヵ月に1回までです。</value>
+  </data>
+  <data name="28" xml:space="preserve">
+    <value>Error. 未入力の項目があります。</value>
+  </data>
+  <data name="29" xml:space="preserve">
+    <value>Error. 未選択の項目があります。</value>
+  </data>
+  <data name="3" xml:space="preserve">
+    <value>女性</value>
+  </data>
+  <data name="30" xml:space="preserve">
+    <value>Error. 入力されたIDは、既に使用されています。</value>
+  </data>
+  <data name="31" xml:space="preserve">
+    <value>Error. 1ユーザが作成できるチーム数は最大3つまでです。</value>
+  </data>
+  <data name="32" xml:space="preserve">
+    <value>チームを作成しました。</value>
+  </data>
+  <data name="33" xml:space="preserve">
+    <value>チームを更新しました。</value>
+  </data>
+  <data name="34" xml:space="preserve">
+    <value>チームのメンバーを削除しました。</value>
+  </data>
+  <data name="35" xml:space="preserve">
+    <value>チームを削除しました。</value>
+  </data>
+  <data name="36" xml:space="preserve">
+    <value>参加を許可しました。</value>
+  </data>
+  <data name="37" xml:space="preserve">
+    <value>Error. {0}チームは、参加申請を受け付けていません。</value>
+  </data>
+  <data name="38" xml:space="preserve">
+    <value>Error. チームIDが入力されていません。</value>
+  </data>
+  <data name="39" xml:space="preserve">
+    <value>Error. 該当するチームが見つかりませんでした。</value>
+  </data>
+  <data name="4" xml:space="preserve">
+    <value>はい</value>
+  </data>
+  <data name="40" xml:space="preserve">
+    <value>Unikktle Mentor ユーザー登録確認メールです</value>
+  </data>
+  <data name="41" xml:space="preserve">
+    <value>ユーザーアカウントを仮登録しました。&lt;br&gt; &lt;a href='{0}'&gt;ここをクリック&lt;/a&gt;してください。&lt;br&gt;クリックすることでアカウントの本登録が完了します。</value>
+  </data>
+  <data name="42" xml:space="preserve">
+    <value>Error. 既に参加申請済みです。</value>
+  </data>
+  <data name="43" xml:space="preserve">
+    <value>Error. 既に参加済みです。</value>
+  </data>
+  <data name="44" xml:space="preserve">
+    <value>パスワードが正しくありません。</value>
+  </data>
+  <data name="45" xml:space="preserve">
+    <value>パスワードは変更されました。</value>
+  </data>
+  <data name="46" xml:space="preserve">
+    <value>チームIDは必須です。</value>
+  </data>
+  <data name="47" xml:space="preserve">
+    <value>チームIDが100文字を超えています</value>
+  </data>
+  <data name="48" xml:space="preserve">
+    <value>チーム説明が200文字を超えています</value>
+  </data>
+  <data name="49" xml:space="preserve">
+    <value>ニックネームは必須です</value>
+  </data>
+  <data name="5" xml:space="preserve">
+    <value>いいえ</value>
+  </data>
+  <data name="50" xml:space="preserve">
+    <value>パスワードが一致しません。</value>
+  </data>
+  <data name="51" xml:space="preserve">
+    <value>{0}は、少なくとも{2}文字で、最大{1}文字の長さである必要があります。</value>
+  </data>
+  <data name="52" xml:space="preserve">
+    <value>新しいパスワードが確認パスワードと一致しません。</value>
+  </data>
+  <data name="53" xml:space="preserve">
+    <value>古いパスワードは必須です。</value>
+  </data>
+  <data name="54" xml:space="preserve">
+    <value>電子メールは必須です。</value>
+  </data>
+  <data name="55" xml:space="preserve">
+    <value>電子メールは有効な電子メールアドレスではありません。</value>
+  </data>
+  <data name="56" xml:space="preserve">
+    <value>パスワードは必須です。</value>
+  </data>
+  <data name="57" xml:space="preserve">
+    <value>パスワードの確認は必須です。</value>
+  </data>
+  <data name="58" xml:space="preserve">
+    <value>性別は必須です。</value>
+  </data>
+  <data name="59" xml:space="preserve">
+    <value>誕生日は必須です。</value>
+  </data>
+  <data name="6" xml:space="preserve">
+    <value>チーム参加申請</value>
+  </data>
+  <data name="60" xml:space="preserve">
+    <value>キャリアは必須です。</value>
+  </data>
+  <data name="61" xml:space="preserve">
+    <value>ログインIDは必須です。</value>
+  </data>
+  <data name="62" xml:space="preserve">
+    <value>電子メールは有効な電子メールアドレスではありません。</value>
+  </data>
+  <data name="63" xml:space="preserve">
+    <value>パスワードは必須です。</value>
+  </data>
+  <data name="64" xml:space="preserve">
+    <value>性別は必須です。</value>
+  </data>
+  <data name="65" xml:space="preserve">
+    <value>誕生日は必須です。</value>
+  </data>
+  <data name="66" xml:space="preserve">
+    <value>職業は必須です。</value>
+  </data>
+  <data name="67" xml:space="preserve">
+    <value>フィードバックカテゴリは必須です。</value>
+  </data>
+  <data name="68" xml:space="preserve">
+    <value>件名は必須です。</value>
+  </data>
+  <data name="69" xml:space="preserve">
+    <value>本文は必須です。</value>
+  </data>
+  <data name="7" xml:space="preserve">
+    <value>{0}ユーザから、{1}チームに参加申請が届いてます。\r\nチームの編集画面で、{0}ユーザからの参加申請を許可するか、参加申請を拒否するか選択して下さい。</value>
+  </data>
+  <data name="70" xml:space="preserve">
+    <value>カテゴリーは必須です。</value>
+  </data>
+  <data name="71" xml:space="preserve">
+    <value>パスワードは必須です。</value>
+  </data>
+  <data name="72" xml:space="preserve">
+    <value>古いパスワードは必須です。</value>
+  </data>
+  <data name="73" xml:space="preserve">
+    <value>新しいパスワードは必須です。</value>
+  </data>
+  <data name="74" xml:space="preserve">
+    <value>チーム参加申請結果</value>
+  </data>
+  <data name="75" xml:space="preserve">
+    <value>{0}チームへの参加申請が許可されました。</value>
+  </data>
+  <data name="96" xml:space="preserve">
+    <value>タイトルは必須です。</value>
+  </data>
+  <data name="97" xml:space="preserve">
+    <value>説明は必須です。</value>
+  </data>
+</root>

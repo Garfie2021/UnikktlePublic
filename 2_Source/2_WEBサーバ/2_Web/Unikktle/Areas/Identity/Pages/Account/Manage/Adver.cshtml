@@ -1,0 +1,162 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model AdverModel
+
+@*Adver*@
+<h3>@Localizer["1"]</h3>
+
+<br>
+
+<label>@Model.BusinessCategory</label>
+<label>@Model.OrganizationName</label>
+@*〇〇の広告設定。*@
+<label>@Localizer["2"]</label>
+
+<p></p>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+
+            <hr class="s1">
+
+            @*検索ワード連動型広告*@
+            <h4>@Localizer["3"]</h4>
+            <p></p>
+
+            @*Add*@
+            <button class="btn btn-primary" asp-page-handler="AddSearch">@Localizer["4"]</button>
+            <p></p>
+
+            @if (Model.AdverSearchList != null && Model.AdverSearchList.Count() > 0)
+            {
+                <table class="Fx5 Nowrap table">
+                    <thead class="Fx6">
+                        <tr>
+                            @*Valid*@
+                            <th scope="col">@Localizer["5"]</th>
+
+                            @*Category*@
+                            <th scope="col">@Localizer["6"]</th>
+
+                            @*Adver Name*@
+                            <th scope="col">@Localizer["7"]</th>
+
+                            @*Advertising budget*@
+                            <th scope="col">@Localizer["8"]</th>
+
+                            @*広告有効期限*@
+                            <th scope="col">@Localizer["9"]</th>
+
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var Adver in Model.AdverSearchList)
+                        {
+                            <tr>
+                                <td>@Adver.Valid.ToString()</td>
+                                <td>@Adver.Category.ToString()</td>
+                                <td>@Adver.AdverName</td>
+                                @if (@Adver.Category == Common.AdverCategory.有料)
+                                {
+                                    <td>@Adver.AdvertisingBudget</td>
+                                    <td>-</td>
+                                }
+                                else
+                                {
+                                    <td>-</td>
+                                    <td>@Adver.ExpirationDate.ToShortDateString()</td>
+                                }
+                                <td>
+                                    @*Edit*@
+                                    <button class="btn btn-primary" asp-page-handler="EditSearch" asp-route-id="@Adver.Id">@Localizer["10"]</button>
+                                </td>
+                                <td>
+                                    @*Delete*@
+                                    <button class="btn btn-primary" asp-page-handler="DeleteSearch" asp-route-id="@Adver.Id">@Localizer["11"]</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+            <p></p>
+            @*関連ワード連動型広告*@
+            <h4>@Localizer["12"]</h4>
+            <p></p>
+
+            @*Add*@
+            <button class="btn btn-primary" asp-page-handler="AddRelation">@Localizer["4"]</button>
+            <p></p>
+
+            @if (Model.AdverRelationList != null && Model.AdverRelationList.Count() > 0)
+            {
+                <table class="Fx5 Nowrap table">
+                    <thead class="Fx6">
+                        <tr>
+                            @*Valid*@
+                            <th scope="col">@Localizer["5"]</th>
+
+                            @*Category*@
+                            <th scope="col">@Localizer["6"]</th>
+
+                            @*Adver Name*@
+                            <th scope="col">@Localizer["7"]</th>
+
+                            @*Advertising budget*@
+                            <th scope="col">@Localizer["8"]</th>
+
+                            @*広告有効期限*@
+                            <th scope="col">@Localizer["9"]</th>
+
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var Adver in Model.AdverRelationList)
+                        {
+                            <tr>
+                                <td>@Adver.Valid.ToString()</td>
+                                <td>@Adver.Category.ToString()</td>
+                                <td>@Adver.AdverName</td>
+                                @if (@Adver.Category == Common.AdverCategory.有料)
+                                {
+                                    <td>@Adver.AdvertisingBudget</td>
+                                    <td>-</td>
+                                }
+                                else
+                                {
+                                    <td>-</td>
+                                    <td>@Adver.ExpirationDate.ToShortDateString()</td>
+                                }
+                                <td>
+                                    @*Edit*@
+                                    <button class="btn btn-primary" asp-page-handler="EditRelation" asp-route-id="@Adver.Id">@Localizer["10"]</button>
+                                </td>
+                                <td>
+                                    @*Delete*@
+                                    <button class="btn btn-primary" asp-page-handler="DeleteRelation" asp-route-id="@Adver.Id">@Localizer["11"]</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+            <p></p>
+            <hr class="s1">
+
+            @*戻る*@
+            <button class="btn btn-primary" asp-page-handler="Back">@Localizer["20"]</button>
+        </form>
+
+    </div>
+</div>

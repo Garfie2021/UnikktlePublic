@@ -1,0 +1,104 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model CreditModel
+@*Credit*@
+<h3>@Localizer["1"]</h3>
+
+<br>
+
+<p></p>
+<div asp-validation-summary="All" class="text-danger"></div>
+<partial name="_StatusMessage" for="StatusMessage" />
+<p></p>
+
+@*  有料広告はクリック課金制です、事前にクレジットを購入する必要があります。
+    クリック課金に伴い保持クレジットがマイナスになることがあります。その場合、次回のクレジット購入時に差し引かれます。
+    検索ワード×広告、関連ワード×広告、それぞれの組み合わせでユーザーが広告をクリックした際の課金は1回までです。
+*@
+<p>@Localizer["5"]</p>
+<p><br /></p>
+
+
+
+@*保有Credit : 〇〇*@
+<p>@Localizer["2"]@Model.OwnedCredit</p>
+<p></p>
+<p><font color="#FF3333">重要：Unikktleに登録したメールアドレスと、PayPalに登録したメールアドレスが一致しない場合、購入したクレジットはUnikktleに反映されません。</font></p>
+
+@* ***開発用*** *@
+@*
+    <p><font color="#FF1111">** During test operation **</font></p>
+    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="NYSE66UBDQBLC">
+        <table>
+            @*Credit*
+            <tr><td><input type="hidden" name="on0" value="Credit">@Localizer["3"]</td></tr>
+            <tr>
+                <td>
+                    <select name="os0">
+                        <option value="1000 Credit">1000 Credit ¥1,000 JPY</option>
+                        <option value="5000 Credit">5000 Credit ¥5,000 JPY</option>
+                        <option value="10000 Credit">10000 Credit ¥10,000 JPY</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" name="currency_code" value="JPY">
+        @*PayPal - オンラインでより安全・簡単にお支払い*
+        <input type="image" src="https://www.sandbox.paypal.com/ja_JP/JP/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="@Localizer["4"]">
+        <img alt="" border="0" src="https://www.sandbox.paypal.com/ja_JP/i/scr/pixel.gif" width="1" height="1">
+    </form>
+*@
+
+@* 本番 *@
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+    <input type="hidden" name="cmd" value="_s-xclick">
+    <input type="hidden" name="hosted_button_id" value="3896HXGLC9LVY">
+    <table>
+        <tr><td><input type="hidden" name="on0" value="Credit">@Localizer["3"]</td></tr>
+        <tr>
+            <td>
+                <select name="os0">
+                    <option value="1000 Credit">1000 Credit ¥1,000 JPY</option>
+                    <option value="5000 Credit">5000 Credit ¥5,000 JPY</option>
+                    <option value="10000 Credit">10000 Credit ¥10,000 JPY</option>
+                    <option value="50000 Credit">50000 Credit ¥50,000 JPY</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" name="currency_code" value="JPY">
+    <input type="image" src="https://www.paypalobjects.com/ja_JP/JP/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="@Localizer["4"]">
+    <img alt="" border="0" src="https://www.paypalobjects.com/ja_JP/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+
+<p><br /><br /></p>
+
+@if (Model.CreditHistory != null && Model.CreditHistory.Count() > 0)
+{
+    <p></p>
+    @*クレジット購入履歴*@
+    <h3>クレジット購入履歴</h3>
+    <table class="Fx5 Nowrap table">
+        <thead class="Fx6">
+            <tr>
+                @*日付*@
+                <th scope="col">日付</th>
+                @*クレジット*@
+                <th scope="col">クレジット</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Credit in Model.CreditHistory)
+            {
+                <tr>
+                    <td>@Credit.RegisteredDate.ToString()</td>
+                    <td>@Credit.AddCredit</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,14 @@
+USE [master]
+GO
+CREATE LOGIN [xxx] WITH PASSWORD=N'xxx', DEFAULT_DATABASE=[UnikktlePayPalListen], DEFAULT_LANGUAGE=[���{��], CHECK_EXPIRATION=OFF, CHECK_POLICY=ON
+GO
+USE [UnikktlePayPalListen]
+GO
+CREATE USER [xxx] FOR LOGIN [xxx]
+GO
+ALTER USER [xxx] WITH DEFAULT_SCHEMA=[dbo]
+GO
+ALTER ROLE [db_datareader] ADD MEMBER [xxx]
+GO
+ALTER ROLE [db_datawriter] ADD MEMBER [xxx]
+GO

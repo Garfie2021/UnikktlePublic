@@ -1,0 +1,87 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using UnikktleMentor.Common
+@using UnikktleMentor.Services
+@inject IViewLocalizer Localizer
+@model UnikktleMentor.Models.IndexViewModel
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+@*
+    タイトル作成テンプレート。a.pngはこれを画像化したもの。
+    <font face="HGS創英角ﾎﾟｯﾌﾟ体" size="60"><font color="#3366ff">U</font><font color="#ff1493">ni</font><font color="#30f060">kk</font><font color="gold">t</font><font color="violet">le</font></font>
+*@
+
+<partial name="_StatusMessage" for="@Model.StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+
+
+<div class="Fx5 ">
+
+    <form name="form1" asp-controller="Home">
+        @*
+            Unikktle Mentor はユーザー登録しなくても診断を行えますが、診断結果を記録することは出来ません。<br>メンタルの変化を把握するためにも、是非、ユーザー登録を行ってから診断に進んで下さい。
+        *@
+        <p>@Localizer["1"]</p>
+        <p>
+            @*
+                診断してみる
+            *@
+            <button class="btn btn-primary" type="submit" asp-action="AnswerNewStart">@Localizer["2"]</button>
+            @*<input class="btn btn-primary" type="button" onclick="location.href='/AnswerNew'" value="@Localizer["診断してみる"]">*@
+            &nbsp;&nbsp;&nbsp;
+            @*
+                ユーザー登録する
+            *@
+            @*<button class="btn btn-primary" type="submit" asp-area="Identity" asp-page="/Account/Register">ユーザー登録する</button>*@
+            <input class="btn btn-primary" type="button" onclick="location.href='/Identity/Account/Register'" value="@Localizer["3"]">
+        </p>
+        <p></p>
+    </form>
+
+    <p><br><hr></p>
+
+    @*
+        診断結果ページでは、メンタル特性や、メタンルから現れる行動の傾向、ノイローゼ、リーダーシップについても、診断結果を見ることができます。
+    *@
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815l4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97l.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25z" fill="#FF6262" /></svg>
+        @Localizer["4"]
+    </p>
+    &nbsp;<img src="/img/u2.jpg" width="771">
+
+    <p><br><hr></p>
+
+    @*
+        マイページでは、「協調性、思考性、抑うつ性、気分の変化、劣等感、神経質、主観性、攻撃性、活動性、のん気、支配性、社会性」の12軸で、自分自身のメンタルの変化を継続的にチェックすることができます。
+    *@
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815l4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97l.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25z" fill="#FF6262" /></svg>
+        @Localizer["5"]
+    </p>
+    &nbsp;<img src="/img/u1.jpg" width="946">
+
+    <p><br><hr></p>
+
+
+    @*
+        ユーザーは自由にチームを作成できます。チームページでは各メンバーのメンタルの状態を見ることができます。
+    *@
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815l4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97l.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25z" fill="#FF6262" /></svg>
+        @Localizer["6"]
+    </p>
+    &nbsp;<img src="/img/u3.jpg" width="775">
+
+    <p><br><br></p>
+</div>
+
+<p></p>
+
+<script>
+    function BtnClick1(btn) {
+        btn.disabled = true;
+        document.forms["form1"].submit();
+    }
+</script>

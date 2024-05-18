@@ -1,0 +1,57 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model BusinessEditModel
+
+@*Business*@
+<h3>@Localizer["1"]</h3>
+
+<br>
+
+<p></p>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<div class="row">
+    <div class="col-md-6">
+
+        <form id="user-setting-form" method="post">
+            <div class="form-group">
+                @*Category*@
+                <label>@Localizer["2"]</label>
+                <select asp-for="Input.Category" class="form-control">
+                    @*法人*@
+                    <option value="1">@Localizer["3"]</option>
+                    @*個人*@
+                    <option value="2">@Localizer["4"]</option>
+                    @*その他*@
+                    <option value="3">@Localizer["5"]</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                @*組織名*@
+                <label>@Localizer["6"]</label>
+                @*100文字まで*@
+                <input asp-for="Input.OrganizationName" type="text" class="form-control" placeholder="@Localizer["7"]" />
+            </div>
+
+            <div class="form-group">
+                @*組織URL*@
+                <label>@Localizer["8"]</label>
+                @*200文字まで*@
+                <input asp-for="Input.OrganizationURL" type="text" class="form-control" placeholder="@Localizer["9"]" />
+            </div>
+
+            <p></p>
+            <hr class="s1">
+            @*戻る*@
+            <button class="btn btn-primary" asp-page-handler="Back">@Localizer["10"]</button>
+            @*Save*@
+            <button id="update-profile-button" type="submit" class="btn btn-primary">@Localizer["11"]</button>
+        </form>
+
+    </div>
+
+</div>

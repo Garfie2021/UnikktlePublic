@@ -1,0 +1,19 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model ConfirmEmailModel
+
+@*
+    Eメール確認
+*@
+<h1>@Localizer["1"]</h1>
+
+@*
+    メールを確認していただきありがとうございます。<br>
+    Unikktle Mentor にログインできるようになりました。 
+*@
+<p>@Localizer["2"]</p>
+
+<p></p>
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>

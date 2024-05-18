@@ -1,0 +1,45 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model TeamJoinComfirmModel
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+
+    <div class="Fx5 ">
+        @*
+            問題がないか確認して下さい。
+        *@
+        <h2>@Localizer["1"]</h2>
+
+        @*
+            チームID：
+        *@
+        <p>@Localizer["2"] @Model._TeamJoinEdit.TeamID</p>
+
+        @*
+            チームリーダーにだけ診断結果を公開する：
+        *@
+        <p>@Localizer["3"] @Model._AllowDiagnosisPublicToTheTeamReader</p>
+
+        @*
+            チームに診断結果を公開する：
+        *@
+        <p>@Localizer["4"] @Model._AllowDiagnosisPublicToTheTeamMember</p>
+
+    </div>
+
+    <p></p>
+    @*
+        戻る
+    *@
+    <button class="btn btn-primary" asp-page-handler="Back">@Localizer["5"]</button>
+
+    @*
+        登録
+    *@
+    <button class="btn btn-primary" asp-page-handler="JoinExec">@Localizer["6"]</button>
+</form>

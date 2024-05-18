@@ -1,0 +1,1 @@
+bcp UnikktleCollect.hst.t6CollaborateKeyword OUT D:\Unikktele\Work\hst_t6CollaborateKeyword.tsv -c -t \t -r \r\n -S xxx -U sa -P xxx

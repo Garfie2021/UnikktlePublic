@@ -1,0 +1,289 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using UnikktleMentor.Common
+@inject IViewLocalizer Localizer
+@model TeamViewModel
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="_StatusMessage" for="@Model.StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<p></p>
+
+<form method="post">
+
+    <h1 class="Fx5">@Model._Team.TeamID</h1>
+    <p></p>
+    <h4 class="Fx5">@Model._Team.TeamExplanation</h4>
+
+    <p></p>
+    <hr>
+    <p></p>
+
+    @*
+        チームのメンタル構成
+    *@
+    <h5><b>@Localizer["1"]</b></h5>
+
+    @*
+        傾向と点数。点数が大きいほどその傾向が強い事を意味します。<br>最大値：5　最小値：1
+    *@
+    <p>@Localizer["2"]</p>
+
+    <canvas id="chartjs-3-2" class="chartjs" width="275" height="137" style="display: block; width: 275px; height: 137px;"></canvas>
+
+    <p></p>
+    <hr>
+    <p></p>
+
+    @*
+        メンバー
+    *@
+    <h5><b>@Localizer["3"]</b></h5>
+
+    <table class="Fx5 table" width="400">
+        <thead class="Fx6">
+            <tr>
+                @*
+                    ユーザー
+                *@
+                <th scope="col" width="200">@Localizer["4"]</th>
+
+                @*
+                    最後に診断した日時
+                *@
+                <th scope="col" width="100">@Localizer["5"]</th>
+
+                @*
+                    状態
+                *@
+                <th scope="col" width="100">@Localizer["6"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model._TeamUserList)
+            {
+                <tr>
+                    <td>
+                        @if (user.Status != JoinTeamStatus.参加申請中)
+                        {
+                            <a href="./TeamViewUser?id=@user.Id">@user.Nickname</a>
+                        }
+                        else
+                        {
+                            @*var str = user.Nickname + "(" + user.Status.ToString() + ")";
+                                <label>@Html.Raw(str)</label>*@
+                            <p>@user.Nickname</p>
+                        }
+                    </td>
+                    @if (user.Status == JoinTeamStatus.参加申請中)
+                    {
+                        <td></td>
+                    }
+                    else
+                    {
+                        <td>@user.AnswerDateStart</td>
+                    }
+                    <td>
+                        @user.Status.ToString()
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p></p>
+    <hr>
+    <p></p>
+
+    @*
+        設定
+    *@
+    <h5><b>@Localizer["7"]</b></h5>
+
+    @*<div class="form-group">
+            @if (Model._Team.AllowPublic)
+            {
+                <input type="checkbox" id="b9" checked='checked' disabled='disabled' />
+            }
+            else
+            {
+                <input type="checkbox" id="b9" disabled='disabled' />
+            }
+            <label class="Fx5" for="b9">@Localizer["チームを非公開にする。※非公開チームにもID指定で参加申請できます。"]</label>
+        </div>*@
+    <div class="form-group">
+        @if (Model._Team.AllowApplyToJoinTeam)
+        {
+            <input type="checkbox" id="b8" checked='checked' disabled='disabled' />
+        }
+        else
+        {
+            <input type="checkbox" id="b8" disabled='disabled' />
+        }
+
+        @*
+            チームへの参加申請を許可する。
+        *@
+        <label class="Fx5" for="b8">@Localizer["8"]</label>
+    </div>
+
+    <p></p>
+    <hr>
+    <p></p>
+
+    @if (Model._TeamOwner)
+    {
+        @*
+            あなたはこのチームのオーナーです。<br>チームのオーナーはチームを編集/削除することが出来ます。
+        *@
+        <p>@Localizer["9"]</p>
+
+        @*
+            チームを編集する
+        *@
+        <button class="btn btn-primary" asp-page-handler="Edit">@Localizer["10"]</button>
+    }
+
+    <p></p>
+    <hr>
+    <p></p>
+
+    @*
+        戻る
+    *@
+    <button class="btn btn-primary" asp-page-handler="Back">@Localizer["11"]</button>
+</form>
+
+
+<link href="/lib/ChartJs/Chart.min.css" rel="stylesheet" type="text/css">
+<script src="/lib/ChartJs/Chart.min.js">
+</script>
+
+@*
+    <script>
+        new Chart(document.getElementById("chartjs-3"),
+            {
+                "type": "radar", "data": {
+                    "labels": ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
+                    "datasets": [
+                        {
+                            "label": "My First Dataset",
+                            "data": [65, 59, 90, 81, 56, 55, 40],
+                            "fill": true,
+                            "backgroundColor": "rgba(255, 99, 132, 0.2)",
+                            "borderColor": "rgb(255, 99, 132)",
+                            "pointBackgroundColor": "rgb(255, 99, 132)",
+                            "pointBorderColor": "#fff",
+                            "pointHoverBackgroundColor": "#fff",
+                            "pointHoverBorderColor": "rgb(255, 99, 132)"
+                        },
+                        {
+                            "label": "My Second Dataset",
+                            "data": [28, 48, 40, 19, 96, 27, 100],
+                            "fill": true,
+                            "backgroundColor": "rgba(54, 162, 235, 0.2)",
+                            "borderColor": "rgb(54, 162, 235)",
+                            "pointBackgroundColor": "rgb(54, 162, 235)",
+                            "pointBorderColor": "#fff",
+                            "pointHoverBackgroundColor": "#fff",
+                            "pointHoverBorderColor": "rgb(54, 162, 235)"
+                        }
+                    ]
+                }, "options": { "elements": { "line": { "tension": 0, "borderWidth": 3 } } }
+            });
+    </script>
+*@
+
+<script>
+    new Chart(document.getElementById("chartjs-3-2"),
+        {
+            "type": "radar",
+            "data": {
+                "labels": [
+                    @*
+                        抑うつ性
+                    *@
+                    "@Localizer["12"]",
+                    @*
+                        気分の変化
+                    *@
+                    "@Localizer["13"]",
+                    @*
+                        劣等感
+                    *@
+                    "@Localizer["14"]",
+                    @*
+                        神経質
+                    *@
+                    "@Localizer["15"]",
+                    @*
+                        主観性
+                    *@
+                    "@Localizer["16"]",
+                    @*
+                        協調性
+                    *@
+                    "@Localizer["17"]",
+                    @*
+                        攻撃性
+                    *@
+                    "@Localizer["18"]",
+                    @*
+                        活動性
+                    *@
+                    "@Localizer["19"]",
+                    @*
+                        のん気
+                    *@
+                    "@Localizer["20"]",
+                    @*
+                        思考性
+                    *@
+                    "@Localizer["21"]",
+                    @*
+                        支配性
+                    *@
+                    "@Localizer["22"]",
+                    @*
+                        社会性
+                    *@
+                    "@Localizer["23"]"],
+                "datasets": [
+                    @foreach (var rader in Model._RaderJS_Data)
+                    {
+                        @Html.Raw(rader);
+                    }
+                ]
+            },
+            "options": {
+                "elements": {
+                    "line": {
+                        "tension": 0,
+                        "borderWidth": 3
+                    }
+                },
+                "legend": {
+                    "labels": {
+                        // This more specific font property overrides the global property
+                        "fontColor": 'black',
+                        "fontSize": 18,
+                    }
+                },
+                "scale": {
+                    "angleLines": {
+                        "display": false
+                    },
+                    "ticks": {
+                        "suggestedMin": 0,
+                        "suggestedMax": 5,
+                        "stepSize": 1
+                    }
+                }
+            }
+        });
+</script>
+

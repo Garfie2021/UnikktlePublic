@@ -1,0 +1,240 @@
+﻿/*
+    White基調
+*/
+
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* 3行を超えたらでも3つの点でまるめる */
+.ms1 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background-color: white;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+/* 
+-------------------------------------------------- */
+.Nowrap {
+    white-space: nowrap;
+}
+
+a {
+    color: blue;
+}
+
+hr.s1 {
+    border-top: 2px solid #000000;
+}
+
+.F3vi {
+    color: #464446;
+    margin: 0 !important
+}
+
+.Fx4vi {
+    padding-left: 27px;
+    color: #464446;
+    margin: 0 !important
+}
+
+.Fx5 {
+    color: #000000;
+}
+
+.Fx6 {
+    background-color: #eafff4;
+}
+
+/* Mindの接続線 */
+.MCL {
+    stroke: Limegreen;
+    stroke-width: 5;
+}
+
+.RectBorder {
+    stroke: orange;
+    stroke-width: 5;
+    fill: white;
+    ry: 8;
+    rx: 10;
+}
+
+.RectNonSelect {
+    fill: yellow;
+    stroke-width: 5;
+    ry: 8;
+    rx: 10;
+}
+
+.RectSelect {
+    fill: yellow;
+    stroke: orange;
+    stroke-width: 5;
+    ry: 8;
+    rx: 10;
+}
+
+.MR2 {
+    stroke: orange;
+    stroke-width: 5;
+    ry: 8;
+    rx: 10;
+}
+
+.RectNext {
+    fill: #007BFF;
+    /*stroke: blueviolet;
+    stroke-width: 5;*/
+    ry: 4;
+    rx: 6;
+}
+
+.RectText {
+    fill: black;
+    /*font-family: VL Gothic;*/
+    font-size: 10;
+}
+
+.RectTextNext {
+    fill: white;
+    /*font-family: VL Gothic;*/
+    font-size: 10;
+}
+
+/*.RectNonSelect {
+    stroke: orange;
+    stroke-width: 5;
+}*/
+
+.Text {
+    /*font-family: 'VL Gothic';*/
+    font-size: 15px;
+}
+
+.PrText {
+    fill: black;
+    /*font-family: VL Gothic;*/
+    font-size: 10;
+}
+
+.HitsText {
+    fill: black;
+    /*font-family: VL Gothic;*/
+    font-size: 10;
+}
+
+.pt {
+    width: 100%;
+    display: flex;
+}
+
+.ch {
+    width: 450px;
+    margin: 15px;
+}
+
+.ch2 {
+    width: 600px;
+    margin: 15px;
+}
+
+.chb {
+    padding: 10px;
+    border: 1px solid #DEE2E6;
+}
+
+.cs {
+    width: 100%;
+    margin: 5px;
+}
+
+.ci {
+    width: 80%;
+    margin: 5px;
+}
+
+.cn {
+    width: 20%;
+    margin: 5px;
+}
+
+.ci2 {
+    width: 50%;
+    margin: 5px;
+}
+
+.cn2 {
+    width: 50%;
+    margin: 5px;
+}
+
+.octicon-zap {
+    color: yellow;
+}
+
+.table1 {
+    width: 800px;
+    table-layout: fixed;
+}
+
+/*.td1 {
+    width: 100px;
+    word-break: break-all;
+}*/

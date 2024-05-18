@@ -1,0 +1,1 @@
+D:\Unikktele\8Export\8Export.exe D:\Unikktele\config\appsettings.json

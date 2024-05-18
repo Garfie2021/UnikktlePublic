@@ -1,0 +1,1 @@
+D:\Unikktele\3ExtractEnglishConcatNoun\ExtractEnglishConcatNoun.exe D:\Unikktele\config\appsettings.json

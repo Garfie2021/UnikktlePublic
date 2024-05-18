@@ -1,0 +1,168 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model FeedbackModel
+
+@*
+    フィードバック
+*@
+<h3>@Localizer["1"]</h3>
+
+<br>
+
+<p>
+    @*
+        問題点やバグ、ご意見ご感想などあればご連絡下さい。
+    *@
+    @Localizer["2"]<br>
+
+    @*
+        今後の運用に生かさせて頂きます。
+    *@
+    @Localizer["3"]
+</p>
+
+<p></p>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<div class="row">
+    <div class="col-md-6">
+        <form id="user-setting-form" method="post">
+            <div class="form-group">
+                @*
+                    カテゴリ
+                *@
+                <label>@Localizer["4"]</label>
+                <select asp-for="Input.FeedbackCategory" class="form-control">
+                    @*
+                        問題点・バグ
+                    *@
+                    <option value="1">@Localizer["5"]</option>
+
+                    @*
+                        意見・感想
+                    *@
+                    <option value="2">@Localizer["6"]</option>
+
+                    @*
+                        その他
+                    *@
+                    <option value="3">@Localizer["7"]</option>
+                </select>
+            </div>
+            <div class="form-group">
+                @*
+                    件名
+                *@
+                <label>@Localizer["8"]</label>
+
+                @*
+                    100文字まで
+                *@
+                <input asp-for="Input.Subject" type="text" class="form-control" placeholder="@Localizer["9"]" />
+                <span asp-validation-for="Input.Subject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @*
+                    本文
+                *@
+                <label>@Localizer["10"]</label>
+
+                @*
+                    500文字まで
+                *@
+                <textarea asp-for="Input.Text" type="text" class="form-control" rows="5" placeholder="@Localizer["11"]"></textarea>
+                <span asp-validation-for="Input.Text" class="text-danger"></span>
+            </div>
+
+            @*
+                送信
+            *@
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Send1">@Localizer["12"]</button>
+            <div class="modal fade" id="Send1" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            @*
+                                確認
+                            *@
+                            <h5 class="modal-title" id="staticBackdropLabel">@Localizer["13"]</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            @*
+                                フィードバックを送信します。よろしいですか？
+                            *@
+                            @Localizer["14"]
+                        </div>
+                        <div class="modal-footer">
+                            @*
+                                いいえ
+                            *@
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer["15"]</button>
+
+                            @*
+                                はい
+                            *@
+                            <button id="update-profile-button" type="submit" class="btn btn-primary">@Localizer["16"]</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <p><br></p>
+        <p></p>
+        <p><hr></p>
+        <p></p>
+
+        @if (Model.FeedbackHistory != null && Model.FeedbackHistory.Count() > 0)
+        {
+            <p></p>
+            @*
+                フィードバックの送信履歴
+            *@
+            <h5><b>@Localizer["17"]</b></h5>
+            <table class="Fx5 Nowrap table">
+                <thead class="Fx6">
+                    <tr>
+                        @*
+                            送信日時
+                        *@
+                        <th scope="col">@Localizer["18"]</th>
+
+                        @*
+                            カテゴリ
+                        *@
+                        <th scope="col">@Localizer["4"]</th>
+
+                        @*
+                            件名
+                        *@
+                        <th scope="col">@Localizer["8"]</th>
+
+                        @*<th scope="col">Text</th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var feedback in Model.FeedbackHistory)
+                    {
+                        <tr>
+                            @*<th scope="row">@feedback.Id</th>*@
+                            <td>@feedback.SendDate.ToString()</td>
+                            <td>@feedback.Category.ToString()</td>
+                            <td>@feedback.Subject</td>
+
+                            @*<td>@feedback.Text</td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

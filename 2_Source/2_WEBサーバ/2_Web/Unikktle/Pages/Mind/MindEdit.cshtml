@@ -1,0 +1,71 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model Unikktle.Pages.Home.MindEditModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3 class="Fx5">@Model.PageTitle</h3>
+
+<p></p>
+<partial name="_StatusMessage" for="@Model.StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<form id="user-setting-form" method="post">
+
+    <div class="form-group">
+        @* Title *@
+        <label class="Fx5">@Localizer["1"]</label>
+        @* 100文字まで *@
+        <input asp-for="Input.Title" type="text" class="form-control" placeholder="@Localizer["8"]" />
+    </div>
+
+    <div class="form-group">
+        @* アイテム間の関係性 *@
+        <label class="Fx5">@Localizer["7"]</label>
+        <a asp-page="/Mind/UnikktileNotation">
+            <svg class="octicon octicon-question" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true">
+                <path fill-rule="evenodd" d="M6 10h2v2H6v-2zm4-3.5C10 8.64 8 9 8 9H6c0-.55.45-1 1-1h.5c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5V7H4c0-1.5 1.5-3 3-3s3 1 3 2.5zM7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7z"></path>
+            </svg>
+        </a>
+        @* 4000文字まで *@
+        <textarea asp-for="Input.ItemRelation" type="text" class="form-control" rows="10" maxlength="4000" placeholder="@Localizer["11"]"></textarea>
+    </div>
+
+    <div class="form-group">
+        @* 説明 *@
+        <label class="Fx5">@Localizer["4"]</label>
+        @* 4000文字まで *@
+        <textarea asp-for="Input.Explanation" type="text" class="form-control" rows="10" maxlength="4000" placeholder="@Localizer["9"]"></textarea>
+    </div>
+
+    @*
+        @if (Model.View_AllowOtherEdit)
+        {
+    *@
+    <div class="form-group">
+        @* 自分にだけ公開する *@
+        <input asp-for="Input.PublishOnlyToMe" type="checkbox" id="c9" /><label class="Fx5" for="c9">@Localizer["12"]</label>
+    </div>
+
+    <div class="form-group">
+        @* 他者の編集を許可する *@
+        <input asp-for="Input.AllowOtherEdit" type="checkbox" id="b9" /><label class="Fx5" for="b9">@Localizer["3"]</label>
+    </div>
+    @*
+        }
+    *@
+
+    @* 戻る *@
+    <button class="btn btn-primary" asp-page-handler="Back">@Localizer["戻る"]</button>
+    @* 登録（確認） *@
+    <button id="update-profile-button" type="submit" class="btn btn-primary">@Localizer["5"]</button>
+    <br>
+
+</form>
+
+@*<partial name="_MindPartial" for=@Model.MindViewModel />*@

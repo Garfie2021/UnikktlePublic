@@ -1,0 +1,112 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using UnikktleMentorEngine
+@inject IViewLocalizer Localizer
+@model UnikktleMentor.Pages.Home.AnswerNewSupplement
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3 class="Fx5">@Model.PageTitle</h3>
+
+<p></p>
+<partial name="_StatusMessage" for="@Model.StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<form id="user-setting-form" method="post">
+
+    <div class="Fx5 ">
+        @*
+            性別。
+        *@
+        <h3>@Localizer["1"]</h3>
+
+        <p></p>
+
+        @if (@Model._UserSettingProfile.Gender == Gender.Female)
+        {
+            <label>
+                @*
+                    男性
+                *@
+                <input asp-for="_Input._Gender" type="radio" value="@Gender.Male">@Localizer["2"]　
+            </label>
+            <label>
+                @*
+                    女性
+                *@
+                <input asp-for="_Input._Gender" type="radio" value="@Gender.Female" checked="checked">@Localizer["3"]　
+            </label>
+        }
+        else
+        {
+            <label>
+                @*
+                    男性
+                *@
+                <input asp-for="_Input._Gender" type="radio" value="@Gender.Male" checked="checked">@Localizer["2"]　
+            </label>
+            <label>
+                @*
+                    女性
+                *@
+                <input asp-for="_Input._Gender" type="radio" value="@Gender.Female">@Localizer["3"]　
+            </label>
+        }
+
+
+        <p></p>
+
+        <div class="form-group">
+            @*
+                職業
+            *@
+            <label>@Localizer["4"]</label>
+            <select asp-for="_Input.Career" class="form-control">
+                @foreach (var category in Model._CareerList)
+                {
+                    <optgroup label="@category.Name">
+                        @foreach (var item in category.CareerList)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </optgroup>
+                }
+            </select>
+        </div>
+
+        <p></p>
+
+        @*
+            自身を取り巻く最近の環境変化をご回答下さい。
+        *@
+        <h3>@Localizer["5"]</h3>
+
+        <p></p>
+
+        <div class="form-group">
+            @*
+                4000文字まで
+            *@
+            <textarea asp-for="_Input.RecentHappenings" type="text" class="form-control" rows="10" maxlength="4000" placeholder="@Localizer["6"]"></textarea>
+        </div>
+
+        @*
+            戻る
+        *@
+        <button id="update-profile-button" type="submit" class="btn btn-primary" asp-page-handler="Back">@Localizer["7"]</button>
+
+        @*
+            確認
+        *@
+        <button id="update-profile-button" type="submit" class="btn btn-primary" asp-page-handler="Confirm">@Localizer["8"]</button>
+
+        <br>
+    </div>
+
+
+</form>
+

@@ -1,0 +1,1 @@
+D:\Unikktele\1CollectEmailMEagazine\CollectEmailMEagazine.exe D:\Unikktele\config\appsettings.json

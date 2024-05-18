@@ -1,0 +1,43 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model DeletePersonalDataModel
+@{
+    ViewData["ActivePage"] = ManageNavPages.PersonalData;
+}
+
+@*Delete Personal Data*@
+<h3>@Localizer["1"]</h3>
+
+<br>
+
+<div class="alert alert-warning" role="alert">
+    <p>
+        <span class="glyphicon glyphicon-warning-sign"></span>
+        @*Deleting this data will permanently remove your account, and this cannot be recovered.*@
+        <strong>@Localizer["2"]</strong>
+    </p>
+</div>
+
+<p></p>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<div>
+    <form id="delete-user" method="post" class="form-group">
+        @if (Model.RequirePassword)
+        {
+            <div class="form-group">
+                @*Password*@
+                <label>@Localizer["3"]</label>
+                <input asp-for="Input.Password" class="form-control" />
+            </div>
+        }
+        @*Delete data and close my account*@
+        <button class="btn btn-danger" type="submit">@Localizer["4"]</button>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

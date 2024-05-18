@@ -1,0 +1,122 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using UnikktleMentorEngine
+@inject IViewLocalizer Localizer
+@model RegisterModel
+
+@*
+    ユーザー登録
+*@
+<h1>@Localizer["1"]</h1>
+
+<p></p>
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <hr class="s1">
+            @*
+                <div class="form-group">
+                <label asp-for="Input.Name"></label>
+                <input asp-for="Input.Name" class="form-control" />
+                </div>
+            *@
+            <div class="form-group">
+                @*
+                    ログインID
+                *@
+                <label>@Localizer["2"]</label>
+                <input asp-for="Input.LoginID" class="form-control" />
+                <span asp-validation-for="Input.LoginID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                @*
+                    パスワード
+                *@
+                <label>@Localizer["3"]</label>
+                <input asp-for="Input.Password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                @*
+                    パスワードを認証する
+                *@
+                <label>@Localizer["4"]</label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                @*
+                    Eメール
+                *@
+                <label>@Localizer["5"]</label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                @*
+                    ニックネーム
+                *@
+                <label>@Localizer["6"]</label>
+                <input asp-for="Input.Nickname" type="text" class="form-control" />
+                <span asp-validation-for="Input.Nickname" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                @*
+                    性別
+                    Gender
+                *@
+                <label>@Localizer["7"]</label>
+                <select asp-for="Input.Gender" class="form-control">
+                    @*
+                        男性
+                    *@
+                    <option value="@Gender.Male">@Localizer["8"]</option>
+                    @*
+                        女性
+                    *@
+                    <option value="@Gender.Female">@Localizer["9"]</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                @*
+                    誕生日
+                *@
+                <label>@Localizer["10"]</label>
+                <input asp-for="Input.BirthDate" type="date" class="form-control" />
+                <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                @*
+                    職業
+                *@
+                <label>@Localizer["11"]</label>
+                <select asp-for="Input.Career" class="form-control">
+                    @foreach (var category in Model.CareerList)
+                    {
+                        <optgroup label="@category.Name">
+                            @foreach (var item in category.CareerList)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </optgroup>
+                    }
+                </select>
+            </div>
+
+            @*
+                登録
+            *@
+            <button type="submit" class="btn btn-primary">@Localizer["12"]</button>
+        </form>
+    </div>
+</div>

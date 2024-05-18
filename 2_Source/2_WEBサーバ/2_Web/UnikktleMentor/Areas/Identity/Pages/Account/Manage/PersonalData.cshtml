@@ -1,0 +1,41 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model PersonalDataModel
+
+@*
+    個人データ
+*@
+<h3>@Localizer["1"]</h3>
+
+<br>
+
+<p></p>
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<div class="row">
+    <div class="col-md-6">
+        @*
+            アカウントには、あなたが私たちに与えた個人データが含まれています。 このページでは、そのデータを削除できます。
+        *@
+        <p>@Localizer["2"]</p>
+        <p>
+            @*
+                このデータを削除すると、アカウントが完全に削除され、復元できなくなります。
+            *@
+            <strong>@Localizer["3"]</strong>
+        </p>
+        @*
+        <form id="download-data" asp-page="DownloadPersonalData" method="post" class="form-group">
+            <button class="btn btn-primary" type="submit">Download</button>
+        </form>
+        *@
+    <p>
+        @*
+            削除する
+        *@
+        <a id="delete" asp-page="DeletePersonalData" class="btn btn-primary">@Localizer["4"]</a>
+    </p>
+    </div>
+</div>

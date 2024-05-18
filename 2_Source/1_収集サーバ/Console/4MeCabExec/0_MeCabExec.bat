@@ -1,0 +1,1 @@
+D:\Unikktele\4MeCabExec\MeCabExec.exe D:\Unikktele\config\appsettings.json

@@ -1,0 +1,61 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model Unikktle.Areas.Identity.Pages.Account.Manage.MindModel
+@* My Mind *@
+<h3>@Localizer["1"]</h3>
+
+<br>
+
+@* UserName のみ編集/削除可能なマインドの一覧 *@
+
+<div class="pt">
+    <div class="Fx5 ci2">
+        <p>自身のみ編集/削除可能なマインドの一覧</p>
+    </div>
+    <div class="cn2">
+        <form method="post">
+            <button id="New" class="btn btn-primary" type="submit" asp-page="/Mind/Mind" asp-page-handler="New">新規作成</button>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+
+        @if (Model.MindList != null && Model.MindList.Count() > 0)
+        {
+            <table class="Fx5 table table1">
+                <thead class="Fx6">
+                    <tr>
+                        @* Mind *@
+                        <th scope="col">@Localizer["3"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var mind in Model.MindList)
+                    {
+                        <tr>
+                            <td>
+                                <form method="post">
+                                    <a asp-page="/Mind/Mind" asp-route-i="@mind.Id">@mind.Title</a>
+                                </form>
+                                @*<div width="100px" overflow-wrap="break-word">*@
+                                @mind.Explanation
+                                @*</div>*@
+
+                                <br>
+                                @* 自分にだけ公開する *@
+                                @Localizer["自分にだけ公開する"] : @mind.PublishOnlyToMe.ToString()
+                                <br>
+                                @* 他者の編集を許可する *@
+                                @Localizer["他者の編集を許可する"] : @mind.AllowOtherEdit.ToString()
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+    </div>
+</div>

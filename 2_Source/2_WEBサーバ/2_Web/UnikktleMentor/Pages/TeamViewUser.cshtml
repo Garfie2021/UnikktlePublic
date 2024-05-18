@@ -1,0 +1,199 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using UnikktleMentor.Common
+@using UnikktleMentor.Services
+@inject IViewLocalizer Localizer
+@model UnikktleMentor.Pages.Mind.TeamViewUser
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<link href="/lib/c3/c3.min.css" rel="stylesheet" type="text/css">
+
+<p></p>
+
+<div class="Fx5" style="height:330px;">
+    @if (Model._AnswerHistory != null && Model._AnswerHistory.Count() > 1)
+    {
+        <div id="chart"></div>
+    }
+    else
+    {
+        <p><br></p>
+        @*
+            ※グラフは診断回数２回以上から表示されます。
+        *@
+        <p>@Localizer["1"]</p>
+        <p></p>
+    }
+</div>
+
+<p></p>
+
+<div class="Fx5 ch">
+
+    <div class="Fx5 ">
+
+        @*
+            過去の診断結果
+        *@
+        <p>@Localizer["2"]</p>
+
+        @if (Model._AnswerHistory_Desc != null && Model._AnswerHistory_Desc.Count() > 0)
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="Fx5 Nowrap table">
+                        <thead class="Fx6">
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model._AnswerHistory_Desc)
+                            {
+                                <tr>
+                                    <td>@item.AnswerDate</td>
+                                    <td>
+                                        @* ※GETの画面遷移したい。<button>タグだとPOSTになってしまうので<input>タグを使ってる。 *@
+                                        @*
+                                            回答内容
+                                        *@
+                                        <input class="btn btn-primary" type="button" onclick="location.href='./AnswerConfirm?id=@item.Id&id2=@Model.TargetUserID'" value="@Localizer["3"]">
+                                    </td>
+                                    <td>
+                                        @* ※GETの画面遷移したい。<button>タグだとPOSTになってしまうので<input>タグを使ってる。 *@
+                                        @*
+                                            診断結果
+                                        *@
+                                        <input class="btn btn-primary" type="button" onclick="location.href='./Diagnosis?id=@item.Id&id2=@Model.TargetUserID'" value="@Localizer["4"]">
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+        else
+        {
+            @*
+                ※過去の診断結果はありません。
+            *@
+            <p>@Localizer["5"]</p>
+        }
+
+    </div>
+</div>
+
+<environment include="Development">
+    <script src="/lib/d3/d3.min.js" asp-append-version="true"></script>
+    <script src="/lib/c3/c3.min.js" asp-append-version="true"></script>
+</environment>
+<environment exclude="Development">
+    <script src="https://d3js.org/d3.v5.min.js"
+            asp-fallback-src="/lib/d3/d3.min.js"
+            asp-fallback-test="d3.text">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.15/c3.min.js"
+            asp-fallback-src="/lib/c3/c3.min.js"
+            asp-fallback-test="c3.text">
+    </script>
+</environment>
+
+<script>
+    c3.generate({
+        bindto: '#chart',
+        data: {
+            columns: [
+                ['x', @Html.Raw(@Model._HomeGetModel._X_Axis) ],
+                @*
+                    抑うつ性
+                *@
+                ['@Localizer["6"]', @Html.Raw(@Model._HomeGetModel._抑うつ性) ],
+                @*
+                    気分の変化
+                *@
+                ['@Localizer["7"]', @Html.Raw(@Model._HomeGetModel._気分の変化) ],
+                @*
+                    劣等感
+                *@
+                ['@Localizer["8"]', @Html.Raw(@Model._HomeGetModel._劣等感) ],
+                @*
+                    神経質
+                *@
+                ['@Localizer["9"]', @Html.Raw(@Model._HomeGetModel._神経質) ],
+                @*
+                    主観性
+                *@
+                ['@Localizer["10"]', @Html.Raw(@Model._HomeGetModel._主観性) ],
+                @*
+                    協調性
+                *@
+                ['@Localizer["11"]', @Html.Raw(@Model._HomeGetModel._協調性) ],
+                @*
+                    攻撃性
+                *@
+                ['@Localizer["12"]', @Html.Raw(@Model._HomeGetModel._攻撃性) ],
+                @*
+                    活動性
+                *@
+                ['@Localizer["13"]', @Html.Raw(@Model._HomeGetModel._活動性) ],
+                @*
+                    のん気
+                *@
+                ['@Localizer["14"]', @Html.Raw(@Model._HomeGetModel._のん気) ],
+                @*
+                    思考性
+                *@
+                ['@Localizer["15"]', @Html.Raw(@Model._HomeGetModel._思考性) ],
+                @*
+                    支配性
+                *@
+                ['@Localizer["16"]', @Html.Raw(@Model._HomeGetModel._支配性) ],
+                @*
+                    社会性
+                *@
+                ['@Localizer["17"]', @Html.Raw(@Model._HomeGetModel._社会性) ]
+            ],
+            x: 'x', // データ x を x軸ラベルにする
+            xFormat: '%Y%m%d', // X軸の元の書式 (%Y/%m/%d %H:%M:%S など)
+            type: 'line'
+        },
+        title: {
+            @*
+                診断結果推移
+            *@
+            text: '@Localizer["18"]',
+        },
+        grid: {
+            y: {
+                show: true // Y軸グリッド表示
+
+            }
+        },
+        bar: {
+            width: {
+                ratio: 0.5,
+            }
+        },
+        axis: {
+            x: {
+                type: 'timeseries', // 時間として指定
+                // X軸ラベル
+                tick: {
+                    culling: false, // x軸ラベルの途中省略をしない
+                    format: '%Y/%m/%d' // X軸の表示書式 (%Y/%m/%d %H:%M:%S など)
+                }
+            },
+            y: {
+                tick: {
+                    values: [1, 2, 3, 4, 5]
+                }
+            }
+        }
+    });
+</script>

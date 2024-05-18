@@ -1,0 +1,104 @@
+﻿@using Unikktle.Common
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model Unikktle.Models.WordMapViewModel
+
+<div class="Fx5">
+    @*{0} に関連するキーワード*@
+    <h3>@Localizer["1", Context.Session.GetString(SessionKey.UserRelationString)]</h3>
+
+    <button class="btn btn-primary sample4" onclick="ClickExternalSearch('@Model.ExternalSearch.URL')" style="position: fixed; top: 100px; right: 10px">@Model.ExternalSearch.Name</button>
+</div>
+
+@* 大元のKeywordと最初の関連キーワードは、画面表示時に描画する *@
+<svg id="s" width="@Model.SvgWordMap.Svg.w" height="@Model.SvgWordMap.Svg.h">
+
+    <rect id="@Model.Id-0" x="@Model.R_x" y="@Model.BaseWord.R_y" width="@Model.BaseWord.R_w" height="30" rx="10" ry="8" fill="lightskyblue" class="RectSelect"></rect>
+    <text id="text-@Model.Id-0" x="@Model.T_x" y="@Model.BaseWord.T_y" class="RectText">@Model.BaseWord.Word</text>
+
+    @*<rect id="@Model.Id" x="10" y="10" width="100" height="30" rx="10" ry="8" fill="yellow" style="stroke: orange; stroke-width: 5;" />
+        <text x="20" y="30" font-family="VL Gothic" font-size="10">@Model.Word</text>*@
+    <g id="GrID-@Model.Id-0">
+    <line x1="@Model.SvgWordMap.Line.x1" y1="@Model.SvgWordMap.Line.y1" x2="@Model.SvgWordMap.Line.x2" y2="@Model.SvgWordMap.Line.y2" class="RectBorder"></line>
+    <rect id="BorderGrID-@Model.Id-0" x="@Model.SvgWordMap.RectBorder.x" y="@Model.SvgWordMap.RectBorder.y" width="@Model.SvgWordMap.RectBorder.w" height="@Model.SvgWordMap.RectBorder.h" class="RectBorder"></rect>
+
+    @if (Model.SvgWordMap.AdverSelectPrRelation.Id > 0)
+    {
+        @: <text id="pr-@Model.Id-0" class="PrText" x="@Model.SvgWordMap.R_x" y="@Model.SvgWordMap.A_t_y_1">
+            @* href="#"を削除するとリンクで表示されない。必要。 *@
+            <a href="#" onclick="ClickPrRelation('@Model.SvgWordMap.AdverSelectPrRelation.AdverURL', @Model.SvgWordMap.AdverSelectPrRelation.UserNo, @Model.SvgWordMap.AdverSelectPrRelation.BusinessNo, @Model.SvgWordMap.AdverSelectPrRelation.AdverNo, @Model.BaseWord.Id);return false;">
+                <tspan x="@Model.SvgWordMap.R_x" y="@Model.SvgWordMap.A_t_y_1">[PR] @Model.SvgWordMap.AdverSelectPrRelation.AdverTitle1</tspan>
+                <tspan x="@Model.SvgWordMap.R_x" y="@Model.SvgWordMap.A_t_y_2">@Model.SvgWordMap.AdverSelectPrRelation.AdverTitle2</tspan>
+            </a>
+        @: </text>
+    }
+    else
+    {
+        @* 該当する広告が0件の場合はgoogleの広告を表示する *@
+        @: <text id="pr-@Model.Id-0" x="@Model.T_x" y="@Model.BaseWord.T_y">
+            @*<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0280624850830583" data-ad-slot="1393483003" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>*@
+        @: </text>
+    }
+
+    @{
+        foreach (var item in Model.SvgWordMap.WordList)
+        {
+            <rect id="@item.Id-1" onmouseenter="RectMouseenter(this.id)" onmouseleave="RectMouseleave(this.id)" onclick="ClickRect(this.id, '@Model.Id')" x="@Model.SvgWordMap.R_x" y="@item.R_y" width="@item.R_w" height="30" class="RectNonSelect"></rect>
+
+            @: <text id="text-@item.Id-1" onmouseenter="TextMouseenter(this.id)" onmouseleave="TextMouseleave(this.id)" onclick="ClickText(this.id, '@Model.Id')" x="@Model.SvgWordMap.T_x" y="@item.T_y" class="RectText">@item.Word</text>
+        }
+    }
+
+    @if (Model.SvgWordMap.NextAvailable)
+    {
+        @: <rect id="NextRectGrID-@Model.Id-0" onmouseenter="NextRectMouseenter(this.id)" onmouseleave="NextRectMouseleave(this.id)" onclick="ClickNext(this.id, '@Model.Id')" x="@Model.SvgWordMap.R_x" y="@Model.SvgWordMap.Next_r_y" width="150" height="30" class="RectNext"></rect>
+        @: <text id="text-NextRectGrID-@Model.Id-0" onmouseenter="NextTextMouseenter(this.id)" onmouseleave="NextTextMouseleave(this.id)" onclick="ClickNextText(this.id, '@Model.Id')" x="@Model.SvgWordMap.T_x" y="@Model.SvgWordMap.Next_t_y" class="RectTextNext">View next 30</text>
+    }
+    </g>
+
+</svg>
+
+@*
+    localStorageは使わない。
+    sessionStorageはセッション継続中のみ保持される。
+*@
+<script type="text/javascript">
+    //document.addEventListener('DOMContentLoaded', function () {
+    $(function () {
+        //console.log("$(function ()");
+        init(@Model.SvgWordMap.Svg.w, @Model.SvgWordMap.Svg.h, @Model.Id)
+    });
+</script>
+
+<environment include="Development">
+    <script src="/lib/d3/d3.min.js" asp-append-version="true"></script>
+    <script src="/js/ClickPrRelation.js" asp-append-version="true"></script>
+    <script src="/js/Page_WordMap.js" asp-append-version="true"></script>
+</environment>
+<environment exclude="Development">
+    <script src="https://d3js.org/d3.v5.min.js"
+            asp-fallback-src="/lib/d3/d3.min.js"
+            asp-fallback-test="d3.text">
+    </script>
+    @* デプロイ時に全jsファイルは site.min.js に纏められる。
+        <script src="/js/ClickPrRelation.min.js" asp-append-version="true"></script>
+    *@
+    <script src="/js/Page_WordMap.min.js" asp-append-version="true"></script>
+</environment>
+
+@*
+    <partial name="/JavaScript/ClickPrRelation.cshtml" />
+*@
+
+@*
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-0280624850830583",
+            enable_page_level_ads: true
+        });
+    </script>
+*@
+

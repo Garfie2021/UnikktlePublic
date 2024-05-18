@@ -1,0 +1,61 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model AdverCompetingUnitPricesSelectModel
+
+@*Adver competitive bid select*@
+<h3>@Localizer["1"]</h3>
+
+<br>
+
+<p></p>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+@*〇〇のクリック単価*@
+<p>@Localizer["2", Model.Word]</p>
+
+@if (Model.UnitPriceList.Count() < 1)
+{
+    @*0 hits.Not found...*@
+    <p>@Localizer["3"]</p>
+
+    @*〇〇を対象にした有料広告は見つかりませんでした。*@
+    <p>@Localizer["4", @Model.Word]</p>
+}
+else
+{
+
+    <div id="s">
+        <table class="Fx5 Nowrap table">
+            <thead class="Fx6">
+                <tr>
+                    @*順位*@
+                    <th scope="col">@Localizer["5"]</th>
+
+                    @*クリック単価*@
+                    <th scope="col">@Localizer["6"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.UnitPriceList)
+                {
+                    <tr>
+                        <td>
+                            <label>@item.Id</label>
+                        </td>
+                        <td>
+                            <label>@item.Price</label>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+    <form method="post">
+        @*戻る*@
+        <button class="btn btn-primary" asp-page-handler="Back">@Localizer["7"]</button>
+    </form>

@@ -1,0 +1,65 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model BusinessModel
+
+@*My Business*@
+<h3>@Localizer["1"]</h3>
+
+<br>
+
+<p></p>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<div class="row">
+    <div class="col-md-6">
+
+        <p>
+            @*Add*@
+            <button class="btn btn-primary" onclick="location.href='BusinessEdit'">@Localizer["2"]</button>
+        </p>
+
+        @if (Model.BusinessList != null && Model.BusinessList.Count() > 0)
+        {
+            <table class="Fx5 Nowrap table">
+                <thead class="Fx6">
+                    <tr>
+                        @*Category*@
+                        <th scope="col">@Localizer["3"]</th>
+                        @*Organization Name*@
+                        <th scope="col">@Localizer["4"]</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var business in Model.BusinessList)
+                    {
+                        <tr>
+                            <td>@business.Category.ToString()</td>
+                            <td>@business.OrganizationName</td>
+                            <td>
+                                @*Edit*@
+                                <button class="btn btn-primary" onclick="location.href='BusinessEdit?id=@business.Id'">@Localizer["5"]</button>
+                            </td>
+                            <td>
+                                @*Adver*@
+                                <button class="btn btn-primary" onclick="location.href='Adver?idb=@business.Id'">@Localizer["6"]</button>
+                            </td>
+                            <td>
+                                <form method="post">
+                                    @*Delete*@
+                                    <button class="btn btn-primary" type="submit" asp-page-handler="Delete" asp-route-id="@business.Id">@Localizer["7"]</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+    </div>
+</div>

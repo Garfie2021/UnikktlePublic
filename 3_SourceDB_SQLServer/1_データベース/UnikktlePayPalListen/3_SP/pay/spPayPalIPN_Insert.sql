@@ -1,0 +1,168 @@
+USE [UnikktlePayPalListen]
+GO
+/*
+*/
+IF OBJECT_ID(N'[pay].[spPayPalIPN_Insert]', N'P') IS NOT NULL
+	DROP PROCEDURE [pay].[spPayPalIPN_Insert] ;
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [pay].[spPayPalIPN_Insert]
+	@PayPalIPNlogNo			[bigint],
+	@RegisteredDate			[datetime],
+	@mc_gross				[varchar](50),
+	@protection_eligibility	[varchar](50),
+	@address_status			[varchar](50),
+	@payer_id				[varchar](50),
+	@address_street			[varchar](100),
+	@payment_date			[varchar](50),
+	@payment_status			[varchar](50),
+	@charset				[varchar](50),
+	@address_zip			[varchar](50),
+	@first_name				[varchar](50),
+	@option_selection1		[varchar](50),
+	@mc_fee					[varchar](50),
+	@address_country_code	[varchar](50),
+	@address_name			[varchar](50),
+	@notify_version			[varchar](50),
+	@custom					[varchar](50),
+	@payer_status			[varchar](50),
+	@business				[varchar](256),
+	@address_country		[varchar](50),
+	@address_city			[varchar](50),
+	@quantity				[varchar](50),
+	@verify_sign			[varchar](500),
+	@payer_email			[varchar](256),
+	@option_name1			[varchar](50),
+	@txn_id					[varchar](50),
+	@payment_type			[varchar](50),
+	@last_name				[varchar](50),
+	@address_state			[varchar](50),
+	@receiver_email			[varchar](256),
+	@payment_fee			[varchar](50),
+	@shipping_discount		[varchar](50),
+	@insurance_amount		[varchar](50),
+	@receiver_id			[varchar](50),
+	@txn_type				[varchar](50),
+	@item_name				[varchar](50),
+	@discount				[varchar](50),
+	@mc_currency			[varchar](50),
+	@item_number			[varchar](50),
+	@residence_country		[varchar](50),
+	@test_ipn				[varchar](50),
+	@shipping_method		[varchar](50),
+	@transaction_subject	[varchar](50),
+	@payment_gross			[varchar](50),
+	@ipn_track_id			[varchar](50),
+	@No						bigint OUTPUT
+AS
+BEGIN
+
+	--declare	@No		bigint = 1;
+
+	INSERT INTO [pay].[tPayPalIPN] (
+		[PayPalIPNlogNo],
+		[RegisteredDate],
+		[mc_gross],
+		[protection_eligibility],
+		[address_status],
+		[payer_id],
+		[address_street],
+		[payment_date],
+		[payment_status],
+		[charset],
+		[address_zip],
+		[first_name],
+		[option_selection1],
+		[mc_fee],
+		[address_country_code],
+		[address_name],
+		[notify_version],
+		[custom],
+		[payer_status],
+		[business],
+		[address_country],
+		[address_city],
+		[quantity],
+		[verify_sign],
+		[payer_email],
+		[option_name1],
+		[txn_id],
+		[payment_type],
+		[last_name],
+		[address_state],
+		[receiver_email],
+		[payment_fee],
+		[shipping_discount],
+		[insurance_amount],
+		[receiver_id],
+		[txn_type],
+		[item_name],
+		[discount],
+		[mc_currency],
+		[item_number],
+		[residence_country],
+		[test_ipn],
+		[shipping_method],
+		[transaction_subject],
+		[payment_gross],
+		[ipn_track_id]
+	) VALUES (
+		@PayPalIPNlogNo,
+		@RegisteredDate,
+		@mc_gross,
+		@protection_eligibility,
+		@address_status,
+		@payer_id,
+		@address_street,
+		@payment_date,
+		@payment_status,
+		@charset,
+		@address_zip,
+		@first_name,
+		@option_selection1,
+		@mc_fee,
+		@address_country_code,
+		@address_name,
+		@notify_version,
+		@custom,
+		@payer_status,
+		@business,
+		@address_country,
+		@address_city,
+		@quantity,
+		@verify_sign,
+		@payer_email,
+		@option_name1,
+		@txn_id,
+		@payment_type,
+		@last_name,
+		@address_state,
+		@receiver_email,
+		@payment_fee,
+		@shipping_discount,
+		@insurance_amount,
+		@receiver_id,
+		@txn_type,
+		@item_name,
+		@discount,
+		@mc_currency,
+		@item_number,
+		@residence_country,
+		@test_ipn,
+		@shipping_method,
+		@transaction_subject,
+		@payment_gross,
+		@ipn_track_id
+	);
+
+	SET @No = SCOPE_IDENTITY();
+
+END
+GO
+/*
+*/

@@ -1,0 +1,116 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model LoginModel
+
+<div class="Fx5 Nowrap">
+    @*Log in*@
+    <h1>@Localizer["1"]</h1>
+
+    <p></p>
+    <partial name="_StatusMessage" for="StatusMessage" />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <p></p>
+
+    <div class="row">
+        <div class="col-md-4">
+            <section>
+                <form id="account" method="post">
+                    <hr class="s1">
+                    <div class="form-group">
+                        @*User ID (Email)*@
+                        <label>@Localizer["2"]</label>
+                        <input asp-for="Input.UserID" class="form-control" />
+                        <span asp-validation-for="Input.UserID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        @*Password*@
+                        <label>@Localizer["3"]</label>
+                        <input asp-for="Input.Password" class="form-control" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            @*Remember me?*@
+                            <input asp-for="Input.RememberMe" />
+                            @Localizer["4"]
+                        </label>
+                    </div>
+                    @*
+                        <input id="Latitude" asp-for="Input.Latitude" type="hidden" />
+                        <input id="Longitude" asp-for="Input.Longitude" type="hidden" />
+                    *@
+                    <div class="form-group">
+                        @*Log in*@
+                        <button type="submit" class="btn btn-primary">@Localizer["5"]</button>
+                    </div>
+                    <div class="form-group">
+                        <p>
+                            @*Forgot your password?*@
+                            <a id="forgot-password" asp-page="./ForgotPassword">@Localizer["6"]</a>
+                        </p>
+                        <p>
+                            @*Register as a new user*@
+                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">@Localizer["7"]</a>
+                        </p>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+    @*
+        <div class="col-md-6 col-md-offset-2">
+            <section>
+                <h4>Use another service to log in.</h4>
+                <hr class="s1">
+                @{
+                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                    {
+                        <div>
+                            <p>
+                                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                for details on setting up this ASP.NET application to support logging in via external services.
+                            </p>
+                        </div>
+                    }
+                    else
+                    {
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <div>
+                                <p>
+                                    @foreach (var provider in Model.ExternalLogins)
+                                    {
+                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    }
+                                </p>
+                            </div>
+                        </form>
+                    }
+                }
+            </section>
+        </div>
+    *@
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+@*
+    <script>
+        $(function ()
+        {
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    // console.log("経度:" + position.coords.latitude + "<br>緯度:" + position.coords.longitude);
+                    // val()とtext()の両方を指定しないと、Inputに値が渡らないWebブラウザがある。
+                    $("#Latitude").val(position.coords.latitude);
+                    $("#Latitude").text(position.coords.latitude);
+                    $("#Longitude").val(position.coords.longitude);
+                    $("#Longitude").text(position.coords.longitude);
+                });
+        });
+
+    </script>
+*@

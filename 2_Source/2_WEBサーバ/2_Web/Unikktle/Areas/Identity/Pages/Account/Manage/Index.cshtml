@@ -1,0 +1,86 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model IndexModel
+@{
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+@*Profile*@
+<h3>@Localizer["1"]</h3>
+
+<br>
+
+<p></p>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<div class="row">
+    <div class="col-md-6">
+        <form id="profile-form" method="post">
+            <div class="form-group">
+                @*User ID (Email)*@
+                <label>@Localizer["2"]</label>
+                <input asp-for="Username" class="form-control" disabled />
+            </div>
+            @*
+                <div class="form-group">
+                    <label asp-for="Input.Email"></label>
+                    @if (Model.IsEmailConfirmed)
+                    {
+                        <div class="input-group">
+                            <input asp-for="Input.Email" class="form-control" />
+                            <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
+                        </div>
+                    }
+                    else
+                    {
+                        <input asp-for="Input.Email" class="form-control" disabled />
+                        <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+                    }
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Input.PhoneNumber"></label>
+                    <input asp-for="Input.PhoneNumber" class="form-control" />
+                </div>
+            *@
+            <div class="form-group">
+                @*Gender*@
+                <label>@Localizer["8"]</label>
+                <select asp-for="Input.Gender" class="form-control">
+                    @*Man*@
+                    <option value="1">@Localizer["3"]</option>
+                    @*Woman*@
+                    <option value="2">@Localizer["4"]</option>
+                </select>
+            </div>
+            <div class="form-group">
+                @*Birth Date*@
+                <label>@Localizer["5"]</label>
+                <input asp-for="Input.BirthDate" type="date" class="form-control" />
+            </div>
+            <div class="form-group">
+                @*Career*@
+                <label>@Localizer["6"]</label>
+                <select asp-for="Input.Career" class="form-control">
+                    @foreach (var category in Model.CareerList)
+                    {
+                        <optgroup label="@category.Name">
+                            @foreach (var item in category.CareerList)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </optgroup>
+                    }
+                </select>
+            </div>
+            @*Save*@
+            <button id="update-profile-button" type="submit" class="btn btn-primary">@Localizer["7"]</button>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

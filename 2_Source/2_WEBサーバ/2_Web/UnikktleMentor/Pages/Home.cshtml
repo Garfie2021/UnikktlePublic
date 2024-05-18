@@ -1,0 +1,311 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using UnikktleMentor.Common
+@using UnikktleMentor.Services
+@inject IViewLocalizer Localizer
+@model UnikktleMentor.Pages.Mind.HomeModel
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<link href="/lib/c3/c3.min.css" rel="stylesheet" type="text/css">
+
+<partial name="_StatusMessage" for="@Model.StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<p></p>
+
+@*
+    診断結果の推移
+*@
+<h5><b>@Localizer["1"]</b></h5>
+
+@*
+    ※悪い方向へ進んでいる場合、環境の改善、習慣の見直しなどをご検討下さい。
+*@
+<p>@Localizer["2"]</p>
+
+<div class="Fx5" style="height:330px;">
+
+    @if (Model._AnswerHistory != null && Model._AnswerHistory.Count() > 1)
+    {
+        <div id="chart"></div>
+    }
+    else
+    {
+        @*
+            ※グラフは診断回数２回以上から表示されます。
+        *@
+        <p>@Localizer["3"]</p>
+        <p><br></p>
+        <p></p>
+    }
+</div>
+
+<p></p>
+
+<form method="post">
+
+    <div class="pt">
+        <div class="Fx5 ch">
+            @*
+                <div class="c4">
+                    タイトル作成テンプレート。a.pngはこれを画像化したもの。
+                    <font face="HGS創英角ﾎﾟｯﾌﾟ体" size="60"><font color="#3366ff">U</font><font color="#ff1493">ni</font><font color="#30f060">kk</font><font color="gold">t</font><font color="violet">le</font></font>
+                </div>
+            *@
+
+            <div class="ind">
+                @*
+                    過去の診断結果
+                *@
+                <h5><b>@Localizer["4"]</b></h5>
+            </div>
+            <div class="ind">
+                @*
+                    新しく診断をする
+                *@
+                <button class="btn btn-primary" asp-page-handler="AnswerNewStart">@Localizer["5"]</button>
+            </div>
+
+            @if (Model._AnswerHistory_Desc != null && Model._AnswerHistory_Desc.Count() > 0)
+            {
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <table class="Fx5 Nowrap table">
+                            <thead class="Fx6">
+                                <tr>
+                                    @*
+                                        診断日時
+                                    *@
+                                    <th scope="col" width="250">@Localizer["6"]</th>
+                                    @*<th scope="col" width="250"></th>*@
+                                    <th scope="col" width="250"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model._AnswerHistory_Desc)
+                                {
+                                <tr>
+                                    <td>@item.AnswerDate</td>
+                                    @*
+                                    <td>
+                                            回答内容
+                                    <button class="btn btn-primary" asp-page-handler="AnswerConfirm" asp-route-id="@item.Id">@Localizer["7"]</button>
+                                    </td>
+                                    *@
+                                    <td>
+                                        @*
+                                            診断結果
+                                        *@
+                                        <button class="btn btn-primary" asp-page-handler="Diagnosis" asp-route-id="@item.Id">@Localizer["8"]</button>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            }
+            else
+            {
+                @*
+                    ※過去の診断結果はありません。
+                *@
+                <p>@Localizer["9"]</p>
+            }
+        </div>
+        <div class="Fx5 ch2">
+
+            <div class="ind">
+                @*
+                    所属チーム
+                *@
+                <h5><b>@Localizer["10"]</b></h5>
+            </div>
+            <div class="ind">
+                @*
+                    新しくチームに参加する
+                *@
+                <input class="btn btn-primary" type="button" onclick="location.href='./TeamJoinEdit'" value="@Localizer["11"]">
+            </div>
+            <div class="ind">
+                @*
+                    新しくチームを作成する
+                *@
+                <button class="btn btn-primary" asp-page-handler="TeamEdit">@Localizer["12"]</button>
+            </div>
+
+            @if (Model._TeamBelongs.Count > 0)
+            {
+                <table class="Fx5 table">
+                    <thead class="Fx6">
+                        <tr>
+                            @*
+                                チームID
+                            *@
+                            <th scope="col" width="250">@Localizer["13"]</th>
+
+                            @*
+                                状態
+                            *@
+                        <th scope="col" width="250">@Localizer["14"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var team in Model._TeamBelongs)
+                        {
+                            <tr>
+                                <td>
+                                    @if (team.Status == JoinTeamStatus.参加申請中)
+                                    {
+                                        @*var str = team.TeamID + "(" + team.Status.ToString() + ")";
+                                            <label>@Html.Raw(str)</label>*@
+                                        <p>@team.TeamID</p>
+                                    }
+                                    else
+                                    {
+                                        <a href="./TeamView?id=@team.Id">@team.TeamID</a>
+                                    }
+                                </td>
+                                <td>
+                                    @team.Status.ToString()
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                @*
+                    ※所属しているチームはありません。
+                *@
+                <p>@Localizer["15"]</p>
+            }
+
+        </div>
+    </div>
+</form>
+
+<environment include="Development">
+    <script src="/lib/d3/d3.min.js" asp-append-version="true"></script>
+    <script src="/lib/c3/c3.min.js" asp-append-version="true"></script>
+</environment>
+<environment exclude="Development">
+    <script src="https://d3js.org/d3.v5.min.js"
+            asp-fallback-src="/lib/d3/d3.min.js"
+            asp-fallback-test="d3.text">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.15/c3.min.js"
+            asp-fallback-src="/lib/c3/c3.min.js"
+            asp-fallback-test="c3.text">
+    </script>
+</environment>
+
+<script>
+c3.generate({
+    bindto: '#chart',
+    data: {
+        columns: [
+            ['x', @Html.Raw(@Model._HomeGetModel._X_Axis) ],
+            @*
+                抑うつ性
+            *@
+            ['@Localizer["16"]', @Html.Raw(@Model._HomeGetModel._抑うつ性) ],
+            @*
+                気分の変化
+            *@
+            ['@Localizer["17"]', @Html.Raw(@Model._HomeGetModel._気分の変化) ],
+            @*
+                劣等感
+            *@
+            ['@Localizer["18"]', @Html.Raw(@Model._HomeGetModel._劣等感) ],
+            @*
+                神経質
+            *@
+            ['@Localizer["19"]', @Html.Raw(@Model._HomeGetModel._神経質) ],
+            @*
+                主観性
+            *@
+            ['@Localizer["20"]', @Html.Raw(@Model._HomeGetModel._主観性) ],
+            @*
+                協調性
+            *@
+            ['@Localizer["21"]', @Html.Raw(@Model._HomeGetModel._協調性) ],
+            @*
+                攻撃性
+            *@
+            ['@Localizer["22"]', @Html.Raw(@Model._HomeGetModel._攻撃性) ],
+            @*
+                活動性
+            *@
+            ['@Localizer["23"]', @Html.Raw(@Model._HomeGetModel._活動性) ],
+            @*
+                のん気
+            *@
+            ['@Localizer["24"]', @Html.Raw(@Model._HomeGetModel._のん気) ],
+            @*
+                思考性
+            *@
+            ['@Localizer["25"]', @Html.Raw(@Model._HomeGetModel._思考性) ],
+            @*
+                支配性
+            *@
+            ['@Localizer["26"]', @Html.Raw(@Model._HomeGetModel._支配性) ],
+            @*
+                社会性
+            *@
+            ['@Localizer["27"]', @Html.Raw(@Model._HomeGetModel._社会性) ]
+        ],
+        @*
+            データ x を x軸ラベルにする
+        *@
+        x: 'x',
+        @*
+            X軸の元の書式 (%Y/%m/%d %H:%M:%S など)
+        *@
+        xFormat: '%Y%m%d',
+        type: 'line'
+    },
+    @*
+    title: {
+        text: '診断結果推移',
+    },
+    *@
+    grid: {
+        y: {
+            @*
+                Y軸グリッド表示
+            *@
+            show: true
+        }
+    },
+    bar: {
+        width: {
+            ratio: 0.5,
+        }
+    },
+    axis: {
+        x: {
+            @* 時間として指定 *@
+            type: 'timeseries',
+            @* X軸ラベル *@
+            tick: {
+                @* x軸ラベルの途中省略をしない *@
+                culling: false,
+                @* X軸の表示書式 (%Y/%m/%d %H:%M:%S など) *@
+                format: '%Y/%m/%d' //
+            }
+        },
+        y: {
+            tick: {
+                values: [1, 2, 3, 4, 5]
+            }
+        }
+    }
+});
+</script>

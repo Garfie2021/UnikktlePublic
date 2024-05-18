@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.6\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props" Condition="Exists('..\..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.6\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props')" />
+  <Import Project="..\..\packages\Microsoft.NetFramework.Analyzers.2.9.6\build\Microsoft.NetFramework.Analyzers.props" Condition="Exists('..\..\packages\Microsoft.NetFramework.Analyzers.2.9.6\build\Microsoft.NetFramework.Analyzers.props')" />
+  <Import Project="..\..\packages\Microsoft.NetCore.Analyzers.2.9.6\build\Microsoft.NetCore.Analyzers.props" Condition="Exists('..\..\packages\Microsoft.NetCore.Analyzers.2.9.6\build\Microsoft.NetCore.Analyzers.props')" />
+  <Import Project="..\..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\build\Microsoft.CodeQuality.Analyzers.props" Condition="Exists('..\..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\build\Microsoft.CodeQuality.Analyzers.props')" />
+  <Import Project="..\..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.6\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props" Condition="Exists('..\..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.6\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{87E1C115-6812-4D23-9E48-B0B1242C6BBA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>DB</RootNamespace>
+    <AssemblyName>DB</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cmn\mnt\SP_Databases.cs" />
+    <Compile Include="Cmn\mnt\SP_Indexes.cs" />
+    <Compile Include="CollaborativeFiltering.cs" />
+    <Compile Include="Collect\hist\BulkCopy_CollectWebPage.cs" />
+    <Compile Include="Collect\hist\BulkCopy_CollectBing.cs" />
+    <Compile Include="Collect\hist\BulkCopy_CollectYahoo.cs" />
+    <Compile Include="Collect\hist\BulkCopy_ExtractWebPage.cs" />
+    <Compile Include="Collect\hist\BulkCopy_ExtractBing.cs" />
+    <Compile Include="Collect\hist\BulkCopy_ExtractGoogle.cs" />
+    <Compile Include="Collect\hist\BulkCopy_ExtractMail.cs" />
+    <Compile Include="Collect\hist\BulkCopy_ExtractYahoo.cs" />
+    <Compile Include="Collect\hist\BulkCopy_HtmlParseWebPage.cs" />
+    <Compile Include="Collect\hist\BulkCopy_HtmlParseBing.cs" />
+    <Compile Include="Collect\hist\BulkCopy_HtmlParseGoogle.cs" />
+    <Compile Include="Collect\hist\BulkCopy_HtmlParseYahoo.cs" />
+    <Compile Include="Collect\hist\SP_CollectBing.cs" />
+    <Compile Include="Collect\hist\SP_ExtractWebPage.cs" />
+    <Compile Include="Collect\hist\SP_CollectWebPage.cs" />
+    <Compile Include="Collect\hist\SP_CollectYahoo.cs" />
+    <Compile Include="Collect\hist\SP_ExtractBing.cs" />
+    <Compile Include="Collect\hist\SP_ExtractGoogle.cs" />
+    <Compile Include="Collect\hist\SP_ExtractMail.cs" />
+    <Compile Include="Collect\hist\SP_ExtractYahoo.cs" />
+    <Compile Include="Collect\hist\SP_HtmlParseBing.cs" />
+    <Compile Include="Collect\hist\SP_HtmlParseWebPage.cs" />
+    <Compile Include="Collect\hist\SP_HtmlParseGoogle.cs" />
+    <Compile Include="Collect\hist\SP_HtmlParseYahoo.cs" />
+    <Compile Include="Cmn\job\SP_ExecHistory.cs" />
+    <Compile Include="Collect\mst\SP_Domain.cs" />
+    <Compile Include="Collect\mst\SP_Url.cs" />
+    <Compile Include="Collect\tmp\BulkCopy_CollectTargetKeyword_WebPage_Tmp.cs" />
+    <Compile Include="Collect\tmp\SP_TmpCollectTargetKeywordWebPage.cs" />
+    <Compile Include="Collect\tmp\SP_TmpCollectTargetKeywordBing.cs" />
+    <Compile Include="Collect\tmp\SP_TmpCollectTargetKeywordGoogle.cs" />
+    <Compile Include="Collect\tmp\SP_TmpCollectTargetKeyword.cs" />
+    <Compile Include="Collect\tmp\SP_TmpCollectTargetKeywordYahoo.cs" />
+    <Compile Include="Collect\wlt\BulkCopy_SearchWord.cs" />
+    <Compile Include="Collect\wlt\SP_SearchWord.cs" />
+    <Compile Include="WebCollectWork\hst\BulkCopy_CollaborateKeyword.cs" />
+    <Compile Include="WebCollectWork\mst\BulkCopy_Keyword.cs" />
+    <Compile Include="Collect\tmp\BulkCopy_CollectTargetKeyword_Bing_Tmp.cs" />
+    <Compile Include="Collect\tmp\BulkCopy_CollectTargetKeyword_Google_Tmp.cs" />
+    <Compile Include="Collect\tmp\BulkCopy_CollectTargetKeyword_Yahoo_Tmp.cs" />
+    <Compile Include="Collect\tmp\SP_TmpCollectTargetKeywordMail.cs" />
+    <Compile Include="Msdb\dbo\SP_StartJob.cs" />
+    <Compile Include="UnikktleCollectDBConnection.cs" />
+    <Compile Include="Collect\hist\BulkCopy_CollectGoogle.cs" />
+    <Compile Include="Collect\hist\BulkCopy_CollectMail.cs" />
+    <Compile Include="Collect\hist\SP_CollaborateKeyword.cs" />
+    <Compile Include="Collect\hist\SP_CollectGoogle.cs" />
+    <Compile Include="Collect\hist\SP_CollectMail.cs" />
+    <Compile Include="Collect\tmp\BulkCopy_CollectTargetKeyword_Mail_Tmp.cs" />
+    <Compile Include="MeCabDB.cs" />
+    <Compile Include="MorphologicalAnalysisDB.cs" />
+    <Compile Include="Collect\mst\SP_CollectTarget.cs" />
+    <Compile Include="Collect\mst\SP_Keyword.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebCollectWork\hst\SP_CollaborateKeywordCount_CollectServer.cs" />
+    <Compile Include="WebCollectWork\hst\SP_CollaborateKeywordCount_WebServer.cs" />
+    <Compile Include="WebCollectWork\hst\SP_CollaborateKeyword.cs" />
+    <Compile Include="WebCollectWork\mst\SP_Keyword.cs" />
+    <Compile Include="Web\clt\SP_Keyword.cs" />
+    <Compile Include="Web\clt\SP_CollaborateKeyword.cs" />
+    <Compile Include="Web\mst\SP_Mind.cs" />
+    <Compile Include="Web\mst\SP_SearchWord.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\File\File.csproj">
+      <Project>{03b5f7c3-02ff-483f-9301-75cca65525e4}</Project>
+      <Name>File</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logging\Logging.csproj">
+      <Project>{32f8e636-314c-4089-a3a3-9cf57c1bf26b}</Project>
+      <Name>Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\定数\定数.csproj">
+      <Project>{b9b7fcba-fafa-4ff9-b230-eb4516e81cc1}</Project>
+      <Name>定数</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.6\analyzers\dotnet\cs\Microsoft.CodeAnalysis.VersionCheckAnalyzer.resources.dll" />
+    <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.6\analyzers\dotnet\Microsoft.CodeAnalysis.VersionCheckAnalyzer.dll" />
+    <Analyzer Include="..\..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\analyzers\dotnet\cs\Humanizer.dll" />
+    <Analyzer Include="..\..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.CodeQuality.Analyzers.dll" />
+    <Analyzer Include="..\..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.CodeQuality.CSharp.Analyzers.dll" />
+    <Analyzer Include="..\..\packages\Microsoft.NetCore.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetCore.Analyzers.dll" />
+    <Analyzer Include="..\..\packages\Microsoft.NetCore.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetCore.CSharp.Analyzers.dll" />
+    <Analyzer Include="..\..\packages\Microsoft.NetFramework.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
+    <Analyzer Include="..\..\packages\Microsoft.NetFramework.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.6\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.6\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\build\Microsoft.CodeQuality.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\build\Microsoft.CodeQuality.Analyzers.props'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.NetCore.Analyzers.2.9.6\build\Microsoft.NetCore.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.NetCore.Analyzers.2.9.6\build\Microsoft.NetCore.Analyzers.props'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.NetFramework.Analyzers.2.9.6\build\Microsoft.NetFramework.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.NetFramework.Analyzers.2.9.6\build\Microsoft.NetFramework.Analyzers.props'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.6\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.6\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props'))" />
+  </Target>
+</Project>

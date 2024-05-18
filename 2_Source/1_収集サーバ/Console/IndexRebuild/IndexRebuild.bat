@@ -1,0 +1,1 @@
+D:\Unikktele\IndexRebuild\IndexRebuild.exe D:\Unikktele\config\appsettings.json

@@ -1,0 +1,29 @@
+﻿@using Unikktle.Common
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model Unikktle.Models.BuyViewModel
+
+@{
+    Layout = "/Views/Shared/_LayoutAbout.cshtml";
+}
+
+<div class="Fx5">
+    <h2>PayPal クレジット購入</h2>
+    <p></p>
+
+    @if (Model.PayPalBuyStatus == PayPalBuyStatus.Completed)
+    {
+        @* お支払いいただき、ありがとうございました。<br>
+           {0} クレジットの購入手続きが完了しました。購入受領メールをお送りしました。<br>
+            取引の詳細を表示するには、PayPalアカウントにログインしてください。
+        *@
+        <p>お支払いいただき、ありがとうございました。<br>@Model.Credit クレジットの購入手続きが完了しました。購入受領メールをお送りしました。<br>取引詳細を表示するには、PayPalアカウントにログインしてください。</p>
+    }
+    else if (Model.PayPalBuyStatus == PayPalBuyStatus.NotCompleted)
+    {
+        @*  *@
+        <p>PayPalの購入手続きが完了していません。<br />暫くお待ち頂くか、PayPalへお問い合わせ下さい。</p>
+    }
+
+
+</div>

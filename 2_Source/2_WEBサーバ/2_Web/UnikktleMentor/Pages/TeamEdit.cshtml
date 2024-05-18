@@ -1,0 +1,326 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using UnikktleMentor.Common
+@inject IViewLocalizer Localizer
+@model TeamEditModel
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model._TeamEdit_SessionModel.EditMode == 編集モード.新規作成)
+{
+    @*
+        チームを新規作成
+    *@
+    <h3 class="Fx5">@Localizer["1"]</h3>
+}
+else
+{
+    @*
+        チームを編集
+    *@
+    <h3 class="Fx5">@Localizer["2"]</h3>
+}
+
+
+<p></p>
+<partial name="_StatusMessage" for="@Model.StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<form method="post">
+    <div class="form-group">
+        @*
+            チームID　※必須
+        *@
+        <label>@Localizer["3"]</label>
+        @*
+            100文字まで
+        *@
+        <input asp-for="Input.TeamID" type="text" class="form-control" maxlength="100" placeholder="@Localizer["4"]" />
+    </div>
+
+    <div class="form-group">
+        @*
+            チームの説明
+        *@
+        <label>@Localizer["5"]</label>
+        @*
+            200文字まで
+        *@
+        <input asp-for="Input.TeamExplanation" type="text" class="form-control" maxlength="200" placeholder="@Localizer["6"]" />
+    </div>
+
+    @*<div class="form-group">
+            <input asp-for="Input.AllowPublic" type="checkbox" id="b9" />
+            <label class="Fx5" for="b9">@Localizer["チームを非公開にする。※非公開チームにもID指定で参加申請できます。"]</label>
+        </div>*@
+
+    <div class="form-group">
+        <input asp-for="Input.AllowApplyToJoinTeam" type="checkbox" id="b8" />
+        @*
+            チームへの参加申請を許可する。
+        *@
+        <label class="Fx5" for="b8">@Localizer["7"]</label>
+    </div>
+
+    @*
+        保存
+    *@
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Save">@Localizer["8"]</button>
+    <div class="modal fade" id="Save" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @*
+                        確認
+                    *@
+                    <h5 class="modal-title" id="staticBackdropLabel">@Localizer["9"]</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @if (Model._TeamEdit_SessionModel.EditMode == 編集モード.新規作成)
+                {
+                    @*
+                        チームを作成します。よろしいですか？
+                    *@
+                    <div class="modal-body">@Localizer["10"]</div>
+                }
+                else
+                {
+                    @*
+                        編集内容を保存します。よろしいですか？
+                    *@
+                    <div class="modal-body">@Localizer["11"]</div>
+                }
+                <div class="modal-footer">
+                    @*
+                        いいえ
+                    *@
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer["12"]</button>
+                    @*
+                        はい
+                    *@
+                    <button class="btn btn-primary" asp-page-handler="Save">@Localizer["13"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p></p>
+    <hr>
+    <p></p>
+
+    @if (Model._TeamEdit_SessionModel.EditMode == 編集モード.編集)
+    {
+        @*
+            チームのメンバー
+        *@
+        <p><b>@Localizer["14"]</b></p>
+
+        <table class="Fx5 table">
+            <thead class="Fx6">
+                <tr>
+                    @*
+                        ニックネーム
+                    *@
+                    <th scope="col" width="200">@Localizer["15"]</th>
+                    @*
+                        メールアドレス
+                    *@
+                    <th scope="col" width="250">@Localizer["16"]</th>
+                    @*
+                        状態
+                    *@
+                    <th scope="col" width="200">@Localizer["17"]</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model._TeamUserList)
+                {
+                    <tr>
+                        <td>
+                            @if (user.Status != JoinTeamStatus.参加申請中)
+                            {
+                                <a href="./TeamViewUser?id=@user.Id">@user.Nickname</a>
+                            }
+                            else
+                            {
+                                <label>@user.Nickname</label>
+                            }
+                        </td>
+                        <td>
+                            @user.EMail
+                        </td>
+                        <td>
+                            @user.Status.ToString()
+                        </td>
+                        <td>
+                            @if (user.Status == JoinTeamStatus.参加申請中)
+                            {
+                                @*
+                                    参加を許可する
+                                *@
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Allow-@user.Id">@Localizer["18"]</button>
+                                <div class="modal fade" id="Allow-@user.Id" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                @*
+                                                    確認
+                                                *@
+                                                <h5 class="modal-title" id="staticBackdropLabel">@Localizer["19"]</h5>
+                                                <button type="button" class="close" data-dismiss="modal">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @*
+                                                    {0}ユーザの参加を許可します。よろしいですか？
+                                                *@
+                                                @Localizer["20", user.Nickname]
+                                            </div>
+                                            <div class="modal-footer">
+                                                @*
+                                                    いいえ
+                                                *@
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer["21"]</button>
+                                                @*
+                                                    はい
+                                                *@
+                                                <button id="Allow" class="btn btn-primary" asp-page-handler="AllowParticipation" asp-route-id="@user.Id">@Localizer["22"]</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </td>
+                        <td>
+                            @if (user.Status != JoinTeamStatus.チームオーナー)
+                            {
+                                @*
+                                    チームから削除する
+                                *@
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#DeleteMember-@user.Id">@Localizer["23"]</button>
+
+                                <div class="modal fade" id="DeleteMember-@user.Id" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                @*
+                                                    確認
+                                                *@
+                                                <h5 class="modal-title" id="staticBackdropLabel">@Localizer["24"]</h5>
+                                                <button type="button" class="close" data-dismiss="modal">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @*
+                                                    ユーザをチームから削除します。よろしいですか？
+                                                *@
+                                                @user.Nickname @Localizer["25"]
+                                            </div>
+                                            <div class="modal-footer">
+                                                @*
+                                                    いいえ
+                                                *@
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer["26"]</button>
+                                                @*
+                                                    はい
+                                                *@
+                                                <button id="DeleteMember" class="btn btn-primary" asp-page-handler="DeleteMember" asp-route-id="@user.Id">@Localizer["27"]</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <p></p>
+        <hr>
+        <p></p>
+
+        @*
+            チームを削除する
+        *@
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#DeleteTeam">@Localizer["28"]</button>
+        <div class="modal fade" id="DeleteTeam" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        @*
+                            確認
+                        *@
+                        <h5 class="modal-title" id="staticBackdropLabel">@Localizer["29"]</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @*
+                        チームを削除します。よろしいですか？
+                    *@
+                    <div class="modal-body">@Localizer["30"]</div>
+                    <div class="modal-footer">
+                        @*
+                            いいえ
+                        *@
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer["31"]</button>
+                        @*
+                            はい
+                        *@
+                        <button class="btn btn-primary" asp-page-handler="Delete" asp-route-id="@Model._TeamEdit_SessionModel.TeamNo">@Localizer["32"]</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p></p>
+        <hr>
+        <p></p>
+
+    }
+
+    @*
+        戻る
+    *@
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#BackTo">@Localizer["33"]</button>
+    <div class="modal fade" id="BackTo" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @*
+                        確認
+                    *@
+                    <h5 class="modal-title" id="staticBackdropLabel">@Localizer["34"]</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @*
+                    戻ると編集内容は破棄されます。よろしいですか？
+                *@
+                <div class="modal-body">@Localizer["35"]</div>
+                <div class="modal-footer">
+                    @*
+                        いいえ
+                    *@
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer["36"]</button>
+                    @*
+                        はい
+                    *@
+                    <button class="btn btn-primary" asp-page-handler="Back">@Localizer["37"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

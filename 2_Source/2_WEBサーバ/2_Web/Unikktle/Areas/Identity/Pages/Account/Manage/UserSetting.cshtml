@@ -1,0 +1,46 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model UserSettingModel
+@{
+    ViewData["ActivePage"] = ManageNavPages.UserSetting;
+}
+
+@*User Setting*@
+<h3>@Localizer["1"]</h3>
+
+<br>
+
+<p></p>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<div class="row">
+    <div class="col-md-6">
+        <form id="user-setting-form" method="post">
+            <div class="form-group">
+                @*Background color*@
+                <label>@Localizer["2"]</label>
+                <select asp-for="Input.BackgroundColor" class="form-control">
+                    @*White*@
+                    <option value="1">@Localizer["3"]</option>
+                    @*Black*@
+                    <option value="2">@Localizer["4"]</option>
+                </select>
+            </div>
+            <div class="form-group">
+                @*External search engine*@
+                <label>@Localizer["5"]</label>
+                <select asp-for="Input.ExternalSearchEngine" class="form-control">
+                    <option value="2">Bing</option>
+                    <option value="1">Google</option>
+                    <option value="3">Yahoo</option>
+                </select>
+            </div>
+
+            @*Save*@
+            <button id="update-profile-button" type="submit" class="btn btn-primary">@Localizer["6"]</button>
+        </form>
+    </div>
+</div>

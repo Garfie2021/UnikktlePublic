@@ -1,0 +1,56 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model TeamJoinSearchModel
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<p></p>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form method="post">
+
+    <div class="Fx5 ">
+
+
+        @*
+            ToDo: 必要になったら作る
+
+            <p></p>
+            <hr>
+            <p></p>
+
+            <h2>チーム検索でチームに参加する</h2>
+
+            <p>検索条件</p>
+
+            <div class="form-group">
+                <label>チームID</label>
+                <input asp-for="Input.TeamID" type="text" class="form-control" placeholder="100文字まで" />
+            </div>
+
+            <div class="form-group">
+                <label>説明</label>
+                <input asp-for="Input.TeamExplanation" type="text" class="form-control" placeholder="100文字まで" />
+            </div>
+
+            <button class="btn btn-primary" asp-page-handler="Search">検索</button>
+
+
+            <p>検索結果</p>
+
+
+            <button class="btn btn-primary" asp-page-handler="JoinSearch">参加</button>
+
+            <p></p>
+
+            <button class="btn btn-primary" asp-page-handler="Back">戻る</button>
+        *@
+
+
+
+    </div>
+
+</form>

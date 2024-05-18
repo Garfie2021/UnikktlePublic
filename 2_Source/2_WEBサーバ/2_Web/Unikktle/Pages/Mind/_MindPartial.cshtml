@@ -1,0 +1,89 @@
+@using System.Web
+@using Unikktle.Common
+@model MindViewModel
+
+
+<div class="Fx5">
+    <h3>@Model.Mind.Title</h3>
+</div>
+<br>
+
+<svg id="s" width="@Model.SVG_Width" height="@Model.SVG_Height">
+
+    @{
+
+        @* Item用Rect *@
+        foreach (var item in Model.RectList)
+        {
+            @*<rect x="@item.X1" y="@item.Y1" width="@item.Width" height="@item.Height" fill="FAFAFA" stroke="orange" stroke-width="5" ry="8" rx="10"></rect>*@
+            <rect x="@item.X1" y="@item.Y1" width="@item.Width" height="@item.Height" fill="@item.Fill" class="MR2"></rect>
+        }
+
+        foreach (var item in Model.LineList)
+        {
+            @*<line x1="@item.X1" y1="@item.Y1" x2="@item.X2" y2="@item.Y2" stroke="#32CD32" class="MCL"></line>*@
+            <line x1="@item.X1" y1="@item.Y1" x2="@item.X2" y2="@item.Y2" stroke="@item.Stroke" class="MCL"></line>
+        }
+
+        @* LineSentence用Rect *@
+        foreach (var item in Model.LineList.Where(x => x.HaveSentence))
+        {
+            @*<rect x="@item.SentenceRect_X1" y="@item.SentenceRect_Y1" width="@item.SentenceWidth" height="@item.SentenceHeight" fill="@item.Stroke" class="MCLS"></rect>*@
+            <rect x="@item.SentenceRect_X1" y="@item.SentenceRect_Y1" width="@item.SentenceWidth" height="@item.SentenceHeight" fill="@item.Stroke"></rect>
+        }
+
+        @* Item用Text *@
+        foreach (var item in Model.TextList)
+        {
+            @*@: <text x="@item.X1" y="@item.Y1" style="font-family:@item.FontFamily; font-size:@item.FontSize;">@item.Sentence</text>*@
+            @: <text x="@item.X1" y="@item.Y1" class="RectText">@item.Sentence</text>
+        }
+
+        @* LineSentence用Text *@
+        foreach (var item in Model.LineList.Where(x => x.HaveSentence))
+        {
+            @*@: <text x="@item.X1" y="@item.Y1" style="font-family:@item.FontFamily; font-size:@item.FontSize;">@item.Sentence</text>*@
+            @: <text x="@item.SentenceText_X1" y="@item.SentenceText_Y1" class="RectText">@item.Sentence</text>
+        }
+
+        foreach (var item in Model.LinkList)
+        {
+            @*@: <text class="PrText" x="@item.X1" y="@item.Y1" style="fill:@item.Fill; font-family:@item.FontFamily; font-size:@item.FontSize;">
+                    *href = "#"を削除するとリンクで表示されない。必要。 *
+                    <a href="#" onclick="ClickPrRelation('@item.URL');return false;">
+                        <tspan x="@item.X1" y="@item.Y1">@item.Sentence</tspan>
+                    </a>
+                @: </text>*@
+        }
+
+        @*foreach (var item in Model.MindRowList)
+            {
+                @if (item.Type == MindType.Rect)
+                {
+                    <rect x="@item.X1" y="@item.Y1" width="@item.Width" height="@item.Height" style="fill:@item.Fill; stroke:@item.Stroke; stroke-width:@item.StrokeWidth; ry:8; rx:10;"></rect>
+                }
+                else if (item.Type == MindType.Line)
+                {
+                    <line x1="@item.X1" y1="@item.Y1" x2="@item.X2" y2="@item.Y2" style="stroke:@item.Stroke; stroke-width:@item.StrokeWidth;"></line>
+                }
+                else if (item.Type == MindType.Text)
+                {
+                    @: <text x="@item.X1" y="@item.Y1" style="fill:@item.Fill; font-family:@item.FontFamily; font-size:@item.FontSize;">@item.Sentence</text>
+                }
+                else if (item.Type == MindType.Link)
+                {
+                    @: <text class="PrText" x="@item.X1" y="@item.Y1" style="fill:@item.Fill; font-family:@item.FontFamily; font-size:@item.FontSize;">
+                        * href="#"を削除するとリンクで表示されない。必要。 *
+                        <a href="#" onclick="ClickPrRelation('@item.URL');return false;">
+                            <tspan x="@item.X1" y="@item.Y1">@item.Sentence</tspan>
+                        </a>
+                    @: </text>
+                }
+            }*@
+    }
+
+</svg>
+
+<div class="Fx5">
+    <p>@Html.Raw(HttpUtility.HtmlEncode(Model.Mind.Explanation).Replace("\n", "<br/>"))</p>
+</div>

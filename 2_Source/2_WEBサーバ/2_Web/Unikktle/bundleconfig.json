@@ -1,0 +1,92 @@
+[
+  {
+    "inputFiles": [
+      "wwwroot/css/License.css",
+      "wwwroot/css/b.css"
+    ],
+    "outputFileName": "wwwroot/css/b.min.css"
+  },
+  {
+    "inputFiles": [
+      "wwwroot/css/License.css",
+      "wwwroot/css/w.css"
+    ],
+    "outputFileName": "wwwroot/css/w.min.css"
+  },
+  {
+    "inputFiles": [
+      "wwwroot/css/License.css",
+      "wwwroot/css/t_b.css"
+    ],
+    "outputFileName": "wwwroot/css/t_b.min.css"
+  },
+  {
+    "inputFiles": [
+      "wwwroot/css/License.css",
+      "wwwroot/css/t_w.css"
+    ],
+    "outputFileName": "wwwroot/css/t_w.min.css"
+  },
+
+  {
+    "inputFiles": [
+      "wwwroot/js/License.js",
+      "wwwroot/js/AdverCategoryChange.js",
+      "wwwroot/js/ClickNextSearch.js",
+      "wwwroot/js/ClickPRRelation.js",
+      "wwwroot/js/ClickPrSearch.js"
+    ],
+    "outputFileName": "wwwroot/js/site.min.js"
+  },
+
+  {
+    "inputFiles": [
+      "wwwroot/js/License.js",
+      "wwwroot/js/Page_AdverRelationWordSelect.js"
+    ],
+    "outputFileName": "wwwroot/js/Page_AdverRelationWordSelect.min.js"
+  },
+  {
+    "inputFiles": [
+      "wwwroot/js/License.js",
+      "wwwroot/js/Page_ClickSearch.js"
+    ],
+    "outputFileName": "wwwroot/js/p.min.js"
+  },
+  {
+    "inputFiles": [
+      "wwwroot/js/License.js",
+      "wwwroot/js/Page_ColorW.js"
+    ],
+    "outputFileName": "wwwroot/js/w.min.js"
+  },
+  {
+    "inputFiles": [
+      "wwwroot/js/License.js",
+      "wwwroot/js/Page_ColorB.js"
+    ],
+    "outputFileName": "wwwroot/js/b.min.js"
+  },
+  {
+    "inputFiles": [
+      "wwwroot/js/License.js",
+      "wwwroot/js/Page_Popover.js"
+    ],
+    "outputFileName": "wwwroot/js/Page_Popover.min.js"
+  },
+  {
+    "inputFiles": [
+      "wwwroot/js/License.js",
+      "wwwroot/js/Page_Search.js"
+    ],
+    "outputFileName": "wwwroot/js/Page_Search.min.js"
+  },
+  {
+    "inputFiles": [
+      "wwwroot/js/License.js",
+      "wwwroot/js/Page_WordMap.js"
+    ],
+    "outputFileName": "wwwroot/js/Page_WordMap.min.js"
+  }
+
+]

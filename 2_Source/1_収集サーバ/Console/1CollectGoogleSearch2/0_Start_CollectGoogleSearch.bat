@@ -1,0 +1,1 @@
+D:\Unikktele\1CollectGoogleSearch\CollectGoogleSearch2.exe D:\Unikktele\config\appsettings.json

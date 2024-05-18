@@ -1,0 +1,111 @@
+﻿@page
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Unikktle.Common
+@inject IViewLocalizer Localizer
+@model Unikktle.Pages.Home.MindModel
+
+@{
+    ViewData["Title"] = "Mind";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<p></p>
+<partial name="_StatusMessage" for="@Model.StatusMessage" />
+<p></p>
+
+<partial name="_MindPartial" for=@Model.MindViewModel />
+
+<p><br></p>
+
+<form method="post">
+    <div>
+        @if (Model.PreviewMode)
+        {
+            <div class="form-group">
+                @* 自分にだけ公開する *@
+                <input asp-for="@Model.MindViewModel.Mind.PublishOnlyToMe" type="checkbox" disabled="disabled" id="c9" /><label class="Fx5" for="c9">@Localizer["6"]</label>
+            </div>
+
+            <div class="form-group">
+                @* 他者の編集を許可する *@
+                <input asp-for="@Model.MindViewModel.Mind.AllowOtherEdit" type="checkbox" disabled="disabled" id="b9" /><label class="Fx5" for="b9">@Localizer["7"]</label>
+            </div>
+
+            @* 戻る *@
+            <button id="Back" class="btn btn-primary" asp-page-handler="Back">@Localizer["2"]</button>
+            @* 登録 *@
+            <button id="Regist" class="btn btn-primary" asp-page-handler="Regist">@Localizer["1"]</button>
+        }
+        else if (Model.Logined)
+        {
+            @* 戻る *@
+            <button id="Back" class="btn btn-primary" asp-page-handler="Back">@Localizer["2"]</button>
+
+            if (Model.MindViewModel.Mind.AllowOtherEdit)
+            {
+                @* 編集 *@
+                <button id="Edit" class="btn btn-primary" asp-page-handler="Edit">@Localizer["3"]</button>
+                @* 複製 *@
+                <button id="Duplication" class="btn btn-primary" asp-page-handler="Duplicat">@Localizer["4"]</button>
+                @* 削除 *@
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">@Localizer["5"]</button>
+                <partial name="_MindPartial_DeleteConfirmation" />
+            }
+            else
+            {
+                if (Model.Author)
+                {
+                    @* 編集 *@
+                    <button id="Edit" class="btn btn-primary" asp-page-handler="Edit">@Localizer["3"]</button>
+                    @* 複製 *@
+                    <button id="Duplication" class="btn btn-primary" asp-page-handler="Duplicat">@Localizer["4"]</button>
+                    @* 削除 *@
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">@Localizer["5"]</button>
+                    <partial name="_MindPartial_DeleteConfirmation" />
+                }
+                else
+                {
+                    @* 複製 *@
+                    <button id="Duplication" class="btn btn-primary" asp-page-handler="Duplicat">@Localizer["4"]</button>
+                }
+            }
+        }
+    </div>
+
+
+</form>
+
+<p><br></p>
+
+@*
+        localStorageは使わない。
+        sessionStorageはセッション継続中のみ保持される。
+    <script type="text/javascript">
+        //document.addEventListener('DOMContentLoaded', function () {
+        $(function () {
+            //console.log("$(function ()");
+            init(@Model.SvgWordMap.Svg.w, @Model.SvgWordMap.Svg.h, @Model.Id)
+        });
+    </script>
+*@
+
+<environment include="Development">
+    <script src="/lib/d3/d3.min.js" asp-append-version="true"></script>
+    <script src="/js/ClickPrRelation.js" asp-append-version="true"></script>
+    <script src="/js/Page_WordMap.js" asp-append-version="true"></script>
+</environment>
+<environment exclude="Development">
+    <script src="https://d3js.org/d3.v5.min.js"
+            asp-fallback-src="/lib/d3/d3.min.js"
+            asp-fallback-test="d3.text">
+    </script>
+    @* デプロイ時に全jsファイルは site.min.js に纏められる。
+        <script src="/js/ClickPrRelation.min.js" asp-append-version="true"></script>
+    *@
+    <script src="/js/Page_WordMap.min.js" asp-append-version="true"></script>
+</environment>
+
+
+

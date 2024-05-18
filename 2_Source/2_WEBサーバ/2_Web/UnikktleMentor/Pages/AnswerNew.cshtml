@@ -1,0 +1,1768 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using UnikktleMentorEngine
+@inject IViewLocalizer Localizer
+@model UnikktleMentor.Pages.Home.AnswerNew
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3 class="Fx5">@Model.PageTitle</h3>
+
+<p></p>
+<partial name="_StatusMessage" for="@Model.StatusMessage" />
+<p></p>
+
+<form id="user-setting-form" method="post">
+
+    <div class="Fx5 ">
+        @*　自分自身の最近の行動をご回答下さい。　*@
+        <h3>@Localizer["1"]</h3>
+
+        <p></p>
+        @*
+        診断開始日時：
+        *@
+        <p>@Localizer["2"] @Model._AnswerNewStart.ToString()</p>
+    </div>
+
+    <div id="s">
+        <p></p>
+
+        <table class="Fx5 table">
+            <tbody>
+                @*@foreach (var item in Model._ViewModel.QuestionList)
+                    {*@
+                <tr>
+                    <td>
+                        @{
+                            var str0 = (Model._QuestionList[0].Id + 1).ToString() + ". " + Model._QuestionList[0].Setsumon;
+                            <p>@Html.Raw(str0)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A0 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A0 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A0 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A0 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A0" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var str1 = (Model._QuestionList[1].Id + 1).ToString() + ". " + Model._QuestionList[1].Setsumon;
+                            <p>@Html.Raw(str1)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A1 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A1 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A1 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A1 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A1" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                @* } *@
+                <tr>
+                    <td>
+                        @{
+                            var str2 = (Model._QuestionList[2].Id + 1).ToString() + ". " + Model._QuestionList[2].Setsumon;
+                            <p>@Html.Raw(str2)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A2 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A2 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A2 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A2 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A2" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var str3 = (Model._QuestionList[3].Id + 1).ToString() + ". " + Model._QuestionList[3].Setsumon;
+                            <p>@Html.Raw(str3)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A3 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A3 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A3 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A3 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A3" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var str4 = (Model._QuestionList[4].Id + 1).ToString() + ". " + Model._QuestionList[4].Setsumon;
+                            <p>@Html.Raw(str4)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A4 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A4 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A4 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A4 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A4" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var str5 = (Model._QuestionList[5].Id + 1).ToString() + ". " + Model._QuestionList[5].Setsumon;
+                            <p>@Html.Raw(str5)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A5 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A5 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A5 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A5 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A5" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var str6 = (Model._QuestionList[6].Id + 1).ToString() + ". " + Model._QuestionList[6].Setsumon;
+                            <p>@Html.Raw(str6)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A6 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A6 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A6 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A6 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A6" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var str7 = (Model._QuestionList[7].Id + 1).ToString() + ". " + Model._QuestionList[7].Setsumon;
+                            <p>@Html.Raw(str7)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A7 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A7 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A7 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A7 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A7" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var str8 = (Model._QuestionList[8].Id + 1).ToString() + ". " + Model._QuestionList[8].Setsumon;
+                            <p>@Html.Raw(str8)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A8 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A8 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A8 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A8 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A8" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var str9 = (Model._QuestionList[9].Id + 1).ToString() + ". " + Model._QuestionList[9].Setsumon;
+                            <p>@Html.Raw(str9)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A9 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A9 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A9 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A9 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A9" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var str10 = (Model._QuestionList[10].Id + 1).ToString() + ". " + Model._QuestionList[10].Setsumon;
+                            <p>@Html.Raw(str10)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A10 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A10 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A10 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A10 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A10" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var str11 = (Model._QuestionList[11].Id + 1).ToString() + ". " + Model._QuestionList[11].Setsumon;
+                            <p>@Html.Raw(str11)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A11 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A11 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A11 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A11 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A11" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var str12 = (Model._QuestionList[12].Id + 1).ToString() + ". " + Model._QuestionList[12].Setsumon;
+                            <p>@Html.Raw(str12)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A12 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A12 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A12 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A12 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A12" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var str13 = (Model._QuestionList[13].Id + 1).ToString() + ". " + Model._QuestionList[13].Setsumon;
+                            <p>@Html.Raw(str13)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A13 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A13 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A13 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A13 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A13" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var str14 = (Model._QuestionList[14].Id + 1).ToString() + ". " + Model._QuestionList[14].Setsumon;
+                            <p>@Html.Raw(str14)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A14 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A14 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A14 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A14 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A14" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var str15 = (Model._QuestionList[15].Id + 1).ToString() + ". " + Model._QuestionList[15].Setsumon;
+                            <p>@Html.Raw(str15)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A15 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A15 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A15 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A15 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A15" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var str16 = (Model._QuestionList[16].Id + 1).ToString() + ". " + Model._QuestionList[16].Setsumon;
+                            <p>@Html.Raw(str16)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A16 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A16 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A16 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A16 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A16" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var str17 = (Model._QuestionList[17].Id + 1).ToString() + ". " + Model._QuestionList[17].Setsumon;
+                            <p>@Html.Raw(str17)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A17 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A17 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A17 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A17 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A17" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var str18 = (Model._QuestionList[18].Id + 1).ToString() + ". " + Model._QuestionList[18].Setsumon;
+                            <p>@Html.Raw(str18)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A18 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A18 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A18 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A18 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A18" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var str19 = (Model._QuestionList[19].Id + 1).ToString() + ". " + Model._QuestionList[19].Setsumon;
+                            <p>@Html.Raw(str19)</p>
+                        }
+                    </td>
+                    <td>
+                        @if (@Model._Input.A19 == 回答選択肢.はい)
+                        {
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.はい" checked="checked">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A19 == 回答選択肢.いいえ)
+                        {
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.いいえ" checked="checked">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A19 == 回答選択肢.どちらともいえない)
+                        {
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.どちらともいえない" checked="checked">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                        else if (@Model._Input.A19 == 回答選択肢.未回答)
+                        {
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.未回答" checked="checked">@Localizer["8"]　
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.はい">@Localizer["5"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.いいえ">@Localizer["6"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.どちらともいえない">@Localizer["7"]　
+                            </label>
+                            <label>
+                                <input asp-for="_Input.A19" type="radio" value="@回答選択肢.未回答">@Localizer["8"]　
+                            </label>
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    @if (Model._CurrentPage == 0)
+    {
+        @*
+			次へ
+        *@
+        <button id="update-profile-button" type="submit" class="btn btn-primary" asp-page-handler="Next">@Localizer["3"]</button>
+    }
+    else
+    {
+        <p>
+            @*
+				戻る
+            *@
+            <button id="update-profile-button" type="submit" class="btn btn-primary" asp-page-handler="Back">@Localizer["4"]</button>
+            &nbsp;&nbsp;&nbsp;
+            @*
+				次へ
+            *@
+            <button id="update-profile-button" type="submit" class="btn btn-primary" asp-page-handler="Next">@Localizer["3"]</button>
+        </p>
+    }
+
+    <br>
+
+</form>
+

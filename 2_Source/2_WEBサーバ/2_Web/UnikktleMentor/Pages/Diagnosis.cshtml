@@ -1,0 +1,911 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using UnikktleMentor.Common
+@inject IViewLocalizer Localizer
+@inject SignInManager<IdentityUser> SignInManager
+@model UnikktleMentor.Pages.Mind.Diagnosis
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="Fx5 ">
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        @* ログイン済み *@
+    }
+    else
+    {
+        @* 未ログイン *@
+
+        <form asp-controller="Home" method="get">
+            @*
+                ユーザ登録すると、診断結果だけではなく、診断結果の記録、メンタルの変化、チームなどの機能を使用できるようになります。
+            *@
+            <p>
+                @Localizer["1"]
+                @*
+                    ユーザー登録
+                *@
+                <button class="btn btn-primary" type="submit" asp-area="Identity" asp-page="/Account/Register">@Localizer["2"]</button>
+            </p>
+        </form>
+
+        <p></p>
+        <p><hr></p>
+        <p></p>
+    }
+
+    @*
+        診断結果
+    *@
+    <h3 class="Fx5">@Localizer["3"]</h3>
+
+    @*
+        その時の回答内容から診断したメンタルの状態です。
+    *@
+    <p>@Localizer["4"]</p>
+
+    <p></p>
+    <p><hr></p>
+    <p></p>
+
+
+    @* 使えるか怪しい
+        <p>回答信頼度： @Model.C01結果.信頼度</p>*@
+
+    <div class="pt">
+        <div class="Fx5 dh">
+
+            @*
+                メンタル構成
+            *@
+            <h5><b>@Localizer["5"]</b></h5>
+
+            @*
+                傾向と点数。点数が大きいほどその傾向が強い事を意味します。<br>最大値：5　最小値：1
+            *@
+            <p>@Localizer["6"]</p>
+
+            <canvas id="chartjs-3-2" class="chartjs" width="275" height="200" style="display: block; width: 275px; height: 200px;"></canvas>
+
+            @*<div class="row">
+                    <div class="col-md-6">
+                        <table class="Fx5 Nowrap table">
+                            <thead class="Fx6">
+                                <tr>
+                                    <th scope="col" width="200">傾向</th>
+                                    <th scope="col">点数</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>抑うつ性</td>
+                                    <td>@Model.C02結果.標準点D</td>
+                                </tr>
+                                <tr>
+                                    <td>気分の変化</td>
+                                    <td>@Model.C02結果.標準点C</td>
+                                </tr>
+                                <tr>
+                                    <td>劣等感</td>
+                                    <td>@Model.C02結果.標準点I</td>
+                                </tr>
+                                <tr>
+                                    <td>神経質</td>
+                                    <td>@Model.C02結果.標準点N</td>
+                                </tr>
+                                <tr>
+                                    <td>主観性</td>
+                                    <td>@Model.C02結果.標準点O</td>
+                                </tr>
+                                <tr>
+                                    <td>協調性</td>
+                                    <td>@Model.C02結果.標準点Co</td>
+                                </tr>
+                                <tr>
+                                    <td>攻撃性</td>
+                                    <td>@Model.C02結果.標準点Ag</td>
+                                </tr>
+                                <tr>
+                                    <td>活動性</td>
+                                    <td>@Model.C02結果.標準点G</td>
+                                </tr>
+                                <tr>
+                                    <td>のん気</td>
+                                    <td>@Model.C02結果.標準点R</td>
+                                </tr>
+                                <tr>
+                                    <td>思考性</td>
+                                    <td>@Model.C02結果.標準点T</td>
+                                </tr>
+                                <tr>
+                                    <td>支配性</td>
+                                    <td>@Model.C02結果.標準点A</td>
+                                </tr>
+                                <tr>
+                                    <td>社会性</td>
+                                    <td>@Model.C02結果.標準点S</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>*@
+
+            <p></p>
+            <p><hr></p>
+            <p></p>
+
+            @*
+                特性と評価
+            *@
+            <h5><b>@Localizer["7"]</b></h5>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="Fx5 Nowrap table">
+                        <thead class="Fx6">
+                            <tr>
+                                @*
+                                    特性
+                                *@
+                                <th scope="col" width="200">@Localizer["8"]</th>
+
+                                @*
+                                    評価
+                                *@
+                                <th scope="col">@Localizer["9"]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @*
+                                    情緒安定性
+                                *@
+                                <td>@Localizer["10"]</td>
+                                <td>@Model.C07結果.mstr情緒安定性</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    社会適応性
+                                *@
+                                <td>@Localizer["11"]</td>
+                                <td>@Model.C07結果.mstr社会適応性</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    活動性
+                                *@
+                                <td>@Localizer["12"]</td>
+                                <td>@Model.C07結果.mstr活動性</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    内省性
+                                *@
+                                <td>@Localizer["13"]</td>
+                                <td>@Model.C07結果.mstr内省性</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    主導性
+                                *@
+                                <td>@Localizer["14"]</td>
+                                <td>@Model.C07結果.mstr主導性</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    社交性
+                                *@
+                                <td>@Localizer["15"]</td>
+                                <td>@Model.C07結果.mstr社交性</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    共感性
+                                *@
+                                <td>@Localizer["16"]</td>
+                                <td>@Model.C07結果.mstr共感性</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <p></p>
+            <p><hr></p>
+            <p></p>
+
+            @*
+                ノイローゼを発症する要因
+            *@
+            <h5><b>@Localizer["17"]</b></h5>
+            <p>@Html.Raw(Model.C09結果.mstr可変)</p>
+            <p><br></p>
+
+            <p></p>
+            <p><hr></p>
+            <p></p>
+
+            @*
+                リーダーシップを阻害する要因
+            *@
+            <h5><b>@Localizer["18"]</b></h5>
+            <p>@Html.Raw(Model.C10結果.mstr可変_阻害因子)</p>
+            <p><br></p>
+
+            <p></p>
+            <p><hr></p>
+            <p></p>
+        </div>
+        <div class="Fx5 dh2">
+            @*
+                よく見られる傾向
+            *@
+            <h5><b>@Localizer["19"]</b></h5>
+
+            @*
+                傾向有り：〇　傾向無し：ブランク
+            *@
+            <p>@Localizer["20"]</p>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="Fx5 Nowrap table">
+                        <thead class="Fx6">
+                            <tr>
+                                @*
+                                    傾向
+                                *@
+                                <th scope="col" width="200">@Localizer["21"]</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @*
+                                    虚脱感
+                                *@
+                                <td>@Localizer["22"]</td>
+                                <td>@Model.C04結果.虚脱感</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    自信欠如
+                                *@
+                                <td>@Localizer["23"]</td>
+                                <td>@Model.C04結果.自信欠如</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    神経質
+                                *@
+                                <td>@Localizer["24"]</td>
+                                <td>@Model.C04結果.神経質</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    倦怠感
+                                *@
+                                <td>@Localizer["25"]</td>
+                                <td>@Model.C04結果.倦怠感</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    閉鎖的 悲観
+                                *@
+                                <td>@Localizer["26"]</td>
+                                <td>@Model.C04結果.閉鎖的_悲観</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    小心
+                                *@
+                                <td>@Localizer["27"]</td>
+                                <td>@Model.C04結果.小心</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    集中力欠如
+                                *@
+                                <td>@Localizer["28"]</td>
+                                <td>@Model.C04結果.集中力欠如</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    お天気屋
+                                *@
+                                <td>@Localizer["29"]</td>
+                                <td>@Model.C04結果.お天気屋</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    感情的
+                                *@
+                                <td>@Localizer["30"]</td>
+                                <td>@Model.C04結果.感情的</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    消極的
+                                *@
+                                <td>@Localizer["31"]</td>
+                                <td>@Model.C04結果.消極的</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    優柔不断
+                                *@
+                                <td>@Localizer["32"]</td>
+                                <td>@Model.C04結果.優柔不断</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    劣等感
+                                *@
+                                <td>@Localizer["33"]</td>
+                                <td>@Model.C04結果.劣等感</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    事なかれ主義
+                                *@
+                                <td>@Localizer["34"]</td>
+                                <td>@Model.C04結果.事なかれ主義</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    ロマンチスト
+                                *@
+                                <td>@Localizer["35"]</td>
+                                <td>@Model.C04結果.ロマンチスト</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    分裂傾向
+                                *@
+                                <td>@Localizer["36"]</td>
+                                <td>@Model.C04結果.分裂傾向</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    対人不信感
+                                *@
+                                <td>@Localizer["37"]</td>
+                                <td>@Model.C04結果.対人不信感</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    不運 不遇感
+                                *@
+                                <td>@Localizer["38"]</td>
+                                <td>@Model.C04結果.不運_不遇感</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    不満感
+                                *@
+                                <td>@Localizer["39"]</td>
+                                <td>@Model.C04結果.不満感</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    活動的
+                                *@
+                                <td>@Localizer["40"]</td>
+                                <td>@Model.C04結果.活動的</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    攻撃性
+                                *@
+                                <td>@Localizer["41"]</td>
+                                <td>@Model.C04結果.攻撃性</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    衝動的
+                                *@
+                                <td>@Localizer["42"]</td>
+                                <td>@Model.C04結果.衝動的</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    自尊心
+                                *@
+                                <td>@Localizer["43"]</td>
+                                <td>@Model.C04結果.自尊心</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    短気
+                                *@
+                                <td>@Localizer["44"]</td>
+                                <td>@Model.C04結果.短気</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    好奇心旺盛
+                                *@
+                                <td>@Localizer["45"]</td>
+                                <td>@Model.C04結果.好奇心旺盛</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    協調的 善意
+                                *@
+                                <td>@Localizer["46"]</td>
+                                <td>@Model.C04結果.協調的_善意</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    敏腕 高能率
+                                *@
+                                <td>@Localizer["47"]</td>
+                                <td>@Model.C04結果.敏腕_高能率</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    快活 楽天的
+                                *@
+                                <td>@Localizer["48"]</td>
+                                <td>@Model.C04結果.快活_楽天的</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    順応的
+                                *@
+                                <td>@Localizer["49"]</td>
+                                <td>@Model.C04結果.順応的</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    多弁 お喋り
+                                *@
+                                <td>@Localizer["50"]</td>
+                                <td>@Model.C04結果.多弁_お喋り</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    軽率 気軽
+                                *@
+                                <td>@Localizer["51"]</td>
+                                <td>@Model.C04結果.軽率_気軽</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    開放的 楽観
+                                *@
+                                <td>@Localizer["52"]</td>
+                                <td>@Model.C04結果.開放的_楽観</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    非思索的
+                                *@
+                                <td>@Localizer["53"]</td>
+                                <td>@Model.C04結果.非思索的</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    無頓着 のん気
+                                *@
+                                <td>@Localizer["54"]</td>
+                                <td>@Model.C04結果.無頓着_のん気</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    自己顕示
+                                *@
+                                <td>@Localizer["55"]</td>
+                                <td>@Model.C04結果.自己顕示</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    世話好き
+                                *@
+                                <td>@Localizer["56"]</td>
+                                <td>@Model.C04結果.世話好き</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    自信家
+                                *@
+                                <td>@Localizer["57"]</td>
+                                <td>@Model.C04結果.自信家</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    指導的
+                                *@
+                                <td>@Localizer["58"]</td>
+                                <td>@Model.C04結果.指導的</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    社交的
+                                *@
+                                <td>@Localizer["59"]</td>
+                                <td>@Model.C04結果.社交的</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    派手好き
+                                *@
+                                <td>@Localizer["60"]</td>
+                                <td>@Model.C04結果.派手好き</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    充実感
+                                *@
+                                <td>@Localizer["61"]</td>
+                                <td>@Model.C04結果.充実感</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    楽天的
+                                *@
+                                <td>@Localizer["62"]</td>
+                                <td>@Model.C04結果.楽天的</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    元気
+                                *@
+                                <td>@Localizer["63"]</td>
+                                <td>@Model.C04結果.元気</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    大胆 安心感
+                                *@
+                                <td>@Localizer["64"]</td>
+                                <td>@Model.C04結果.大胆_安心感</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    集中力旺盛
+                                *@
+                                <td>@Localizer["65"]</td>
+                                <td>@Model.C04結果.集中力旺盛</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    穏健
+                                *@
+                                <td>@Localizer["66"]</td>
+                                <td>@Model.C04結果.穏健</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    冷静
+                                *@
+                                <td>@Localizer["67"]</td>
+                                <td>@Model.C04結果.冷静</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    積極的
+                                *@
+                                <td>@Localizer["68"]</td>
+                                <td>@Model.C04結果.積極的</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    果断 決断
+                                *@
+                                <td>@Localizer["69"]</td>
+                                <td>@Model.C04結果.果断_決断</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    優越感
+                                *@
+                                <td>@Localizer["70"]</td>
+                                <td>@Model.C04結果.優越感</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    現実主義
+                                *@
+                                <td>@Localizer["71"]</td>
+                                <td>@Model.C04結果.現実主義</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    安定的
+                                *@
+                                <td>@Localizer["72"]</td>
+                                <td>@Model.C04結果.安定的</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    幸運感
+                                *@
+                                <td>@Localizer["73"]</td>
+                                <td>@Model.C04結果.幸運感</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    満足感
+                                *@
+                                <td>@Localizer["74"]</td>
+                                <td>@Model.C04結果.満足感</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    行動不活発
+                                *@
+                                <td>@Localizer["75"]</td>
+                                <td>@Model.C04結果.行動不活発</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    慎重
+                                *@
+                                <td>@Localizer["76"]</td>
+                                <td>@Model.C04結果.慎重</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    自己卑下
+                                *@
+                                <td>@Localizer["77"]</td>
+                                <td>@Model.C04結果.自己卑下</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    気長
+                                *@
+                                <td>@Localizer["78"]</td>
+                                <td>@Model.C04結果.気長</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    現状維持的
+                                *@
+                                <td>@Localizer["79"]</td>
+                                <td>@Model.C04結果.現状維持的</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    非協調的
+                                *@
+                                <td>@Localizer["80"]</td>
+                                <td>@Model.C04結果.非協調的</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    不器用 非能率
+                                *@
+                                <td>@Localizer["81"]</td>
+                                <td>@Model.C04結果.不器用_非能率</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    陰気 幻滅感
+                                *@
+                                <td>@Localizer["82"]</td>
+                                <td>@Model.C04結果.陰気_幻滅感</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    批判的
+                                *@
+                                <td>@Localizer["83"]</td>
+                                <td>@Model.C04結果.批判的</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    無口
+                                *@
+                                <td>@Localizer["84"]</td>
+                                <td>@Model.C04結果.無口</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    熟慮 重厚
+                                *@
+                                <td>@Localizer["85"]</td>
+                                <td>@Model.C04結果.熟慮_重厚</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    思索的
+                                *@
+                                <td>@Localizer["86"]</td>
+                                <td>@Model.C04結果.思索的</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    警戒心
+                                *@
+                                <td>@Localizer["87"]</td>
+                                <td>@Model.C04結果.警戒心</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    引込み思案
+                                *@
+                                <td>@Localizer["88"]</td>
+                                <td>@Model.C04結果.引込み思案</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    不干渉主義
+                                *@
+                                <td>@Localizer["89"]</td>
+                                <td>@Model.C04結果.不干渉主義</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    非指導的
+                                *@
+                                <td>@Localizer["90"]</td>
+                                <td>@Model.C04結果.非指導的</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    非社交的
+                                *@
+                                <td>@Localizer["91"]</td>
+                                <td>@Model.C04結果.非社交的</td>
+                            </tr>
+                            <tr>
+                                @*
+                                    地味
+                                *@
+                                <td>@Localizer["92"]</td>
+                                <td>@Model.C04結果.地味</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    @if (Model._UserSettingProfile != null && Model._UserSettingProfile.MentorLiteracy == MentorLiteracy.開発者)
+    {
+        <p></p>
+        <p><hr></p>
+        <p></p>
+        @*
+            診断結果詳細
+        *@
+        <p><h4>@Localizer["93"]</h4></p>
+
+        <p>@Html.Raw(Model.診断結果)</p>
+    }
+
+</div>
+
+<link href="/lib/ChartJs/Chart.min.css" rel="stylesheet" type="text/css">
+<script src="/lib/ChartJs/Chart.min.js" asp-append-version="true"></script>
+
+@*<script>
+        new Chart(document.getElementById("chartjs-3"),
+            {
+                "type": "radar", "data": {
+                    "labels": ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
+                    "datasets": [
+                        {
+                            "label": "My First Dataset",
+                            "data": [65, 59, 90, 81, 56, 55, 40],
+                            "fill": true,
+                            "backgroundColor": "rgba(255, 99, 132, 0.2)",
+                            "borderColor": "rgb(255, 99, 132)",
+                            "pointBackgroundColor": "rgb(255, 99, 132)",
+                            "pointBorderColor": "#fff",
+                            "pointHoverBackgroundColor": "#fff",
+                            "pointHoverBorderColor": "rgb(255, 99, 132)"
+                        },
+                        {
+                            "label": "My Second Dataset",
+                            "data": [28, 48, 40, 19, 96, 27, 100],
+                            "fill": true,
+                            "backgroundColor": "rgba(54, 162, 235, 0.2)",
+                            "borderColor": "rgb(54, 162, 235)",
+                            "pointBackgroundColor": "rgb(54, 162, 235)",
+                            "pointBorderColor": "#fff",
+                            "pointHoverBackgroundColor": "#fff",
+                            "pointHoverBorderColor": "rgb(54, 162, 235)"
+                        }
+                    ]
+                }, "options": { "elements": { "line": { "tension": 0, "borderWidth": 3 } } }
+            });
+    </script>*@
+
+<script>
+    new Chart(document.getElementById("chartjs-3-2"),
+        {
+            "type": "radar",
+            "data": {
+                "labels": [
+                    @*
+                        抑うつ性
+                    *@
+                    "@Localizer["94"]",
+                    @*
+                        気分の変化
+                    *@
+                    "@Localizer["95"]",
+                    @*
+                        劣等感
+                    *@
+                    "@Localizer["96"]",
+                    @*
+                        神経質
+                    *@
+                    "@Localizer["97"]",
+                    @*
+                        主観性
+                    *@
+                    "@Localizer["98"]",
+                    @*
+                        協調性
+                    *@
+                    "@Localizer["99"]",
+                    @*
+                        攻撃性
+                    *@
+                    "@Localizer["100"]",
+                    @*
+                        活動性
+                    *@
+                    "@Localizer["101"]",
+                    @*
+                        のん気
+                    *@
+                    "@Localizer["102"]",
+                    @*
+                        思考性
+                    *@
+                    "@Localizer["103"]",
+                    @*
+                        支配性
+                    *@
+                    "@Localizer["104"]",
+                    @*
+                        社会性
+                    *@
+                    "@Localizer["105"]"],
+                "datasets": [
+                    @foreach (var rader in Model._RaderJS_Data)
+                    {
+                        @Html.Raw(rader);
+                    }
+                ]
+            },
+            "options": {
+                "elements": {
+                    "line": {
+                        "tension": 0,
+                        "borderWidth": 3
+                    }
+                },
+                "legend": {
+                    "labels": {
+                        // This more specific font property overrides the global property
+                        "fontColor": 'black',
+                        "fontSize": 18,
+                    }
+                },
+                "scale": {
+                    "angleLines": {
+                        "display": false
+                    },
+                    "ticks": {
+                        "suggestedMin": 0,
+                        "suggestedMax": 5,
+                        "stepSize": 1
+                    }
+                }
+            }
+        });
+</script>
+

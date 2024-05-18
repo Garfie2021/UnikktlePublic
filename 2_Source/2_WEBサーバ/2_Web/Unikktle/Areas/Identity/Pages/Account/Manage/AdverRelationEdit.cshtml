@@ -1,0 +1,211 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model AdverRelationEditModel
+
+@*Adver relation edit*@
+<h3>@Localizer["1"]</h3>
+
+<br>
+
+@*関連ワードMap画面に表示される、関連ワード連動型広告を設定します。*@
+<p>@Localizer["2"]</p>
+
+<p></p>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<div class="row">
+    <div class="col-md-6">
+
+        <form id="user-setting-form" method="post">
+            <div class="form-group">
+                @*Valid/Invalid*@
+                <label>@Localizer["3"]</label>
+
+                @*Valid/Invalid*@
+                @*有効期限が切れた無料広告は自動的に無効になります。Creditが切れると有料広告は自動的に無効になります。*@
+                <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="@Localizer["3"]" data-content="@Localizer["5"]">
+                    <svg class="octicon octicon-question" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M6 10h2v2H6v-2zm4-3.5C10 8.64 8 9 8 9H6c0-.55.45-1 1-1h.5c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5V7H4c0-1.5 1.5-3 3-3s3 1 3 2.5zM7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7z"></path>
+                    </svg>
+                </a>
+
+                <select asp-for="Input.Valid" class="form-control">
+                    @*有効*@
+                    <option value="1">@Localizer["6"]</option>
+                    @*無効*@
+                    <option value="0">@Localizer["7"]</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                @*Category*@
+                <label>@Localizer["8"]</label>
+
+                <select asp-for="Input.Category" class="form-control" onchange="ChangeAdverCategory(this);">
+                    @*有料*@
+                    <option value="2">@Localizer["9"]</option>
+                    @*無料*@
+                    <option value="1">@Localizer["10"]</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                @*広告名*@
+                <label>@Localizer["11"]</label>
+
+                @*広告名*@
+                @*広告主管理用の広告名。*@
+                <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="@Localizer["11"]" data-content="@Localizer["13"]">
+                    <svg class="octicon octicon-question" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M6 10h2v2H6v-2zm4-3.5C10 8.64 8 9 8 9H6c0-.55.45-1 1-1h.5c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5V7H4c0-1.5 1.5-3 3-3s3 1 3 2.5zM7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7z"></path>
+                    </svg>
+                </a>
+
+                @*50文字まで*@
+                <input asp-for="Input.AdverName" type="text" class="form-control" placeholder="@Localizer["14"]" />
+            </div>
+
+            <div class="form-group">
+                @*広告タイトル 1行目*@
+                <label>@Localizer["15"]</label>
+
+                @*キーワード検索画面に表示される広告のタイトルは２行で構成されています。2行の内の1行目。[PR]が付加されて表示されます。*@
+                <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="@Localizer["15"]" data-content="@Localizer["17"]">
+                    <svg class="octicon octicon-question" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M6 10h2v2H6v-2zm4-3.5C10 8.64 8 9 8 9H6c0-.55.45-1 1-1h.5c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5V7H4c0-1.5 1.5-3 3-3s3 1 3 2.5zM7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7z"></path>
+                    </svg>
+                </a>
+
+                @*50文字まで*@
+                <input asp-for="Input.AdverTitle1" type="text" class="form-control" placeholder="@Localizer["14"]" />
+            </div>
+
+            <div class="form-group">
+                @*広告タイトル 2行目*@
+                <label>@Localizer["19"]</label>
+
+                @*キーワード検索画面に表示される広告のタイトルは２行で構成されています。2行の内の2行目。*@
+                <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="@Localizer["19"]" data-content="@Localizer["21"]">
+                    <svg class="octicon octicon-question" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M6 10h2v2H6v-2zm4-3.5C10 8.64 8 9 8 9H6c0-.55.45-1 1-1h.5c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5V7H4c0-1.5 1.5-3 3-3s3 1 3 2.5zM7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7z"></path>
+                    </svg>
+                </a>
+
+                @*50文字まで*@
+                <input asp-for="Input.AdverTitle2" type="text" class="form-control" placeholder="@Localizer["14"]" />
+            </div>
+
+            <div class="form-group">
+                @*遷移先の広告URL*@
+                <label>@Localizer["30"]</label>
+
+                @*広告をクリックした際に遷移する URL。*@
+                <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="@Localizer["30"]" data-content="@Localizer["32"]">
+                    <svg class="octicon octicon-question" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M6 10h2v2H6v-2zm4-3.5C10 8.64 8 9 8 9H6c0-.55.45-1 1-1h.5c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5V7H4c0-1.5 1.5-3 3-3s3 1 3 2.5zM7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7z"></path>
+                    </svg>
+                </a>
+
+                @*200文字まで*@
+                <input asp-for="Input.AdverURL" type="text" class="form-control" placeholder="@Localizer["33"]" />
+            </div>
+
+            <div id="abd" class="form-group" @Model.CategoryInitialStyle>
+                @*広告予算（Advertising budget）*@
+                <label>@Localizer["34"]</label>
+
+                @*広告がクリックされた際に消費されるコストのリミット。*@
+                <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="@Localizer["34"]" data-content="@Localizer["36"]">
+                    <svg class="octicon octicon-question" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M6 10h2v2H6v-2zm4-3.5C10 8.64 8 9 8 9H6c0-.55.45-1 1-1h.5c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5V7H4c0-1.5 1.5-3 3-3s3 1 3 2.5zM7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7z"></path>
+                    </svg>
+                </a>
+
+                @*9桁まで*@
+                <input asp-for="Input.AdvertisingBudget" type="text" class="form-control" placeholder="@Localizer["37"]" />
+            </div>
+
+            <p></p>
+            <hr class="s1">
+            <p></p>
+            <div class="form-group">
+                @*関連キーワード*@
+                <label>@Localizer["40"]</label>
+
+                @*広告を表示する対象の関連キーワード。*@
+                <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="@Localizer["40"]" data-content="@Localizer["42"]">
+                    <svg class="octicon octicon-question" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M6 10h2v2H6v-2zm4-3.5C10 8.64 8 9 8 9H6c0-.55.45-1 1-1h.5c.28 0 .5-.22.5-.5v-1c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5V7H4c0-1.5 1.5-3 3-3s3 1 3 2.5zM7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7z"></path>
+                    </svg>
+                </a>
+                <br>
+
+                @*Add*@
+                <button class="btn btn-primary" asp-page-handler="RelationWordAdd">@Localizer["43"]</button>
+                <p></p>
+
+                @if (Model._ViewModel.RelationWordList != null && Model._ViewModel.RelationWordList.Count(x => x.DelFlg == Common.DelFlg.削除しない) > 0)
+                {
+                    <table class="Fx5 Nowrap table">
+                        <thead class="Fx6">
+                            <tr>
+                                @*Word*@
+                                <th scope="col">@Localizer["44"]</th>
+                                @*クリック単価*@
+                                <th scope="col">@Localizer["45"]</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model._ViewModel.RelationWordList.Where(x => x.DelFlg == Common.DelFlg.削除しない))
+                            {
+                                <tr>
+                                    <td>@item.Word</td>
+                                    <td>@item.ClickCost</td>
+                                    <td>
+                                        @*Edit*@
+                                        <button class="btn btn-primary" asp-page-handler="RelationWordEdit" asp-route-id="@item.Id">@Localizer["46"]</button>
+                                    </td>
+                                    <td>
+                                        @*Delete*@
+                                        <button class="btn btn-primary" asp-page-handler="RelationWordDelete" asp-route-id="@item.Id">@Localizer["47"]</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+
+            <p></p>
+            <hr class="s1">
+            <p></p>
+            @*戻る*@
+            <button class="btn btn-primary" asp-page-handler="Back">@Localizer["50"]</button>
+
+            @*保存*@
+            <button id="update-profile-button" class="btn btn-primary" asp-page-handler="Save">@Localizer["51"]</button>
+        </form>
+    </div>
+</div>
+
+@*
+    <partial name="/JavaScript/AdverCategoryChange.cshtml" />
+    <partial name="/JavaScript/Popover.cshtml" />
+*@
+
+<environment include="Development">
+    <script src="/js/AdverCategoryChange.js" asp-append-version="true"></script>
+    <script src="/js/Page_Popover.js" asp-append-version="true"></script>
+</environment>
+<environment exclude="Development">
+    @* デプロイ時に全jsファイルは site.min.js に纏められる。
+        <script src="/js/AdverCategoryChange.min.js" asp-append-version="true"></script>
+    *@
+    <script src="/js/Page_Popover.min.js" asp-append-version="true"></script>
+</environment>
+

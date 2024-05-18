@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = LocOptions.Value.SupportedUICultures
+        .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
+        .ToList();
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "/" : $"~{Context.Request.Path.Value}";
+}
+
+<footer class="border-top footer text-muted">
+    <form id="selectLanguage" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" class="form-horizontal" role="form">
+        <div class="container">
+            <label class="F3vi" asp-for="@requestCulture.RequestCulture.UICulture.Name">@Localizer["4"]</label>
+            <select name="culture" onchange="this.form.submit();" asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems"></select>
+
+            @* About Unikktle *@
+            <a class="Fx4vi" asp-area="" asp-controller="Home" asp-action="About">@Localizer["1"]</a>
+            @* Feedback *@
+            <a class="Fx4vi" href="/Identity/Account/Manage/Feedback">@Localizer["3"]</a>
+        </div>
+    </form>
+</footer>

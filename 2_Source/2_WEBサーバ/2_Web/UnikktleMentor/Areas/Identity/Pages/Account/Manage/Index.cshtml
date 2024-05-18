@@ -1,0 +1,155 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using UnikktleMentorEngine
+@inject IViewLocalizer Localizer
+@model IndexModel
+
+@*
+    プロフィール
+*@
+<h3>@Localizer["1"]</h3>
+
+<br>
+
+<p></p>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<div class="row">
+    <div class="col-md-6">
+        <form id="profile-form" method="post">
+            <div class="form-group">
+                @*
+                    ログインID
+                *@
+                <label>@Localizer["2"]</label>
+                <input asp-for="Username" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                @*
+                    Eメールアドレス
+                *@
+                <label>@Localizer["3"]</label>
+                <input asp-for="Input.Email" type="text" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @*
+                    ニックネーム
+                *@
+                <label>@Localizer["4"]</label>
+                <input asp-for="Input.Nickname" type="text" class="form-control" />
+                <span asp-validation-for="Input.Nickname" class="text-danger"></span>
+            </div>
+
+            @*
+            <div class="form-group">
+                <label asp-for="Input.Email"></label>
+                @if (Model.IsEmailConfirmed)
+                {
+                    <div class="input-group">
+                        <input asp-for="Input.Email" class="form-control" />
+                        <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
+                    </div>
+                }
+                else
+                {
+                    <input asp-for="Input.Email" class="form-control" disabled />
+                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+                }
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Input.PhoneNumber"></label>
+                <input asp-for="Input.PhoneNumber" class="form-control" />
+            </div>
+            *@
+            <div class="form-group">
+                @*
+                    性別
+                    Gender
+                *@
+                <label>@Localizer["5"]</label>
+                <select asp-for="Input.Gender" class="form-control">
+                    @*
+                        男性
+                        Man
+                    *@
+                    <option value="@Gender.Male">@Localizer["6"]</option>
+                    @*
+                        女性
+                        Woman
+                    *@
+                    <option value="@Gender.Female">@Localizer["7"]</option>
+                </select>
+            </div>
+            <div class="form-group">
+                @*
+                    誕生日
+                    Birth Date
+                *@
+                <label>@Localizer["8"]</label>
+                <input asp-for="Input.BirthDate" type="date" class="form-control" />
+                <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @*
+                    職業
+                    Career
+                *@
+                <label>@Localizer["9"]</label>
+                <select asp-for="Input.Career" class="form-control">
+                    @foreach (var category in Model.CareerList)
+                    {
+                        <optgroup label="@category.Name">
+                            @foreach (var item in category.CareerList)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </optgroup>
+                    }
+                </select>
+            </div>
+
+            @*
+                保存
+                Save
+            *@
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Send1">@Localizer["10"]</button>
+            <div class="modal fade" id="Send1" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            @*
+                                確認
+                            *@
+                            <h5 class="modal-title" id="staticBackdropLabel">@Localizer["13"]</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            @*
+                                プロフィールを更新します。よろしいですか？
+                            *@
+                            @Localizer["14"]
+                        </div>
+                        <div class="modal-footer">
+                            @*
+                                いいえ
+                            *@
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer["15"]</button>
+
+                            @*
+                                はい
+                            *@
+                            <button id="update-profile-button" type="submit" class="btn btn-primary">@Localizer["16"]</button>
+                        </div>
+                        </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

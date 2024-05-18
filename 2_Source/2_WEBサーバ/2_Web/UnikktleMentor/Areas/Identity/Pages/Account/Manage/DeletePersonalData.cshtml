@@ -1,0 +1,47 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model DeletePersonalDataModel
+
+@*
+    個人データを削除する
+*@
+<h3>@Localizer["1"]</h3>
+
+<br>
+
+<div class="alert alert-warning" role="alert">
+    <p>
+        <span class="glyphicon glyphicon-warning-sign"></span>
+
+        @*
+            このデータを削除するとアカウントが完全に削除され、復元できなくなります
+        *@
+        <strong>@Localizer["2"]</strong>
+    </p>
+</div>
+
+<p></p>
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<div>
+    <form id="delete-user" method="post" class="form-group">
+        @if (Model.RequirePassword)
+        {
+            <div class="form-group">
+                @*
+                    パスワード
+                *@
+                <label>@Localizer["3"]</label>
+
+                <input asp-for="Input.Password" class="form-control" />
+            </div>
+        }
+
+        @*
+            データを削除してアカウントを閉じる
+        *@
+        <button class="btn btn-danger" type="submit">@Localizer["4"]</button>
+    </form>
+</div>

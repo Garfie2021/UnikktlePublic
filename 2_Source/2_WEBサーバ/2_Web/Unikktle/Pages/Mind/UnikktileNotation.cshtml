@@ -1,0 +1,142 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@* Unikktle Mind のモデル記法 *@
+<h3 class="Fx5">@Localizer["1"]</h3>
+
+<div class="Fx5">
+    @* アイテムとアイテム間の関係を記述することで、モデルを作成できます。 *@
+    <p>@Localizer["2"]</p>
+    <br>
+
+    <h4>
+        <svg height="32" class="octicon octicon-info" viewBox="0 0 14 16" version="1.1" width="28" aria-hidden="true">
+            <path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path>
+        </svg>
+        @* アイテム *@
+        &nbsp;@Localizer["3"]
+    </h4>
+    <p>
+        @* １行１アイテム。列は | 記号で区切る。
+            前の行のアイテムは背面に、後の行のアイテムは前面に表示される。
+        *@
+        &nbsp;&nbsp;@Localizer["4"]
+    </p>
+
+    <table class="Fx5 Nowrap table">
+        <thead class="Fx6">
+            <tr>
+                @* 列No *@
+                <th scope="col">@Localizer["5"]</th>
+                @* 説明 *@
+                <th scope="col">@Localizer["6"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @* 1列目 *@
+                <td>@Localizer["7"]</td>
+                @* アイテムNo。<br>必須。ユニークNo。 *@
+                <td>@Localizer["8"]</td>
+            </tr>
+            <tr>
+                @* 2列目 *@
+                <td>@Localizer["9"]</td>
+                @* アイテム名。必須。 *@
+                <td>@Localizer["10"]</td>
+            </tr>
+            @* 下線 *@
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+    </p>
+    <p>
+        @*
+            サンプル。<br>
+            1|サーバーホスティングサービス（VPS）<br>
+            2|Webサーバー<br>
+            3|CentOS 7.7
+        *@
+        @Localizer["11"]
+    </p>
+    <br>
+
+    <h4>
+        <svg height="32" class="octicon octicon-info" viewBox="0 0 14 16" version="1.1" width="28" aria-hidden="true">
+            <path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path>
+        </svg>
+        @* アイテム間の関係 *@
+        &nbsp;@Localizer["12"]
+    </h4>
+    <p>
+        @* １行１関係。列は | 記号で区切る。 *@
+        &nbsp;&nbsp;@Localizer["13"]
+    </p>
+
+    <table class="Fx5 Nowrap table">
+        <thead class="Fx6">
+            <tr>
+                @* 列No *@
+                <th scope="col">@Localizer["14"]</th>
+                @* 説明 *@
+            <th scope="col">@Localizer["15"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @* 1列目 *@
+                <td>@Localizer["16"]</td>
+                @* 関係するアイテムのNo。左側。<br>必須。 *@
+            <td>@Localizer["17"]</td>
+            </tr>
+            <tr>
+                @* 2列目 *@
+                <td>@Localizer["18"]</td>
+                @* 
+                    関係を示す記号。<br>
+                    >：左側アイテムは、右側アイテムに依存する。<br>
+                    -：左側アイテムは、右側アイテムに接続する。
+                *@
+                <td>@Localizer["19"]</td>
+            </tr>
+            <tr>
+                @* 3列目 *@
+                <td>@Localizer["20"]</td>
+                @* 関係するアイテムのNo。右側。<br>必須。 *@
+                <td>@Localizer["21"]</td>
+            </tr>
+            <tr>
+                @* 4列目 *@
+                <td>@Localizer["22"]</td>
+                @* 接続名。-記号を使用した場合のみ有効。 *@
+                <td>@Localizer["23"]</td>
+            </tr>
+            @* 下線 *@
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+    </p>
+    <p>
+        @*
+            サンプル。<br>
+            2|>|1|<br>
+            101|-|5|https
+        *@
+        @Localizer["24"]
+    </p>
+    <br>
+
+</div>

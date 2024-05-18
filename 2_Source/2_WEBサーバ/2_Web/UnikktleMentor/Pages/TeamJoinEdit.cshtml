@@ -1,0 +1,65 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model TeamJoinSettingModel
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+@*
+    参加するチームの条件を設定して下さい。
+*@
+<h2>@Localizer["1"]</h2>
+<p></p>
+
+<p></p>
+<partial name="_StatusMessage" for="@Model.StatusMessage" />
+<div asp-validation-summary="All" class="text-danger"></div>
+<p></p>
+
+<form method="post">
+
+    <div class="Fx5 ">
+        <div class="form-group">
+            @*
+                参加するチームのID
+            *@
+            <label>@Localizer["2"]</label>
+
+            @*
+                100文字まで
+            *@
+            <input asp-for="Input.TeamID" type="text" class="form-control" placeholder="@Localizer["3"]" />
+        </div>
+
+        <div class="form-group">
+            <input asp-for="Input.AllowDiagnosisPublicToTheTeamReader" type="checkbox" id="b9" />
+
+            @*
+                チームリーダーにだけ診断結果を公開する。
+            *@
+            <label class="Fx5" for="b9">@Localizer["4"]</label>
+        </div>
+
+        <div class="form-group">
+            <input asp-for="Input.AllowDiagnosisPublicToTheTeamMember" type="checkbox" id="b9" />
+
+            @*
+                チームに診断結果を公開する。
+            *@
+            <label class="Fx5" for="b9">@Localizer["5"]</label>
+        </div>
+    </div>
+
+    <p></p>
+    @*
+        戻る
+    *@
+    <button class="btn btn-primary" asp-page-handler="Back">@Localizer["6"]</button>
+
+    @*
+        確認
+    *@
+    <button class="btn btn-primary" asp-page-handler="JoinComfirm">@Localizer["7"]</button>
+</form>

@@ -1,0 +1,18 @@
+[
+  {
+    "inputFiles": [
+      "wwwroot/css/License.css",
+      "wwwroot/css/w.css"
+    ],
+    "outputFileName": "wwwroot/css/w.min.css"
+  },
+
+  {
+    "inputFiles": [
+      "wwwroot/js/License.js",
+      "wwwroot/js/site.js"
+    ],
+    "outputFileName": "wwwroot/js/site.min.js"
+  }
+
+]

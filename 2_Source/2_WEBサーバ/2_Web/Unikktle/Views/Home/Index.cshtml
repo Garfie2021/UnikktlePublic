@@ -1,0 +1,39 @@
+﻿@using Unikktle.Common
+@using Unikktle.Services
+@inject UserSettingService UserSetting
+
+@{
+    Layout = "/Views/Shared/_LayoutTop.cshtml";
+}
+
+<div class="c4">
+
+    @*
+        タイトル作成テンプレート。a.pngはこれを画像化したもの。
+        <font face="HGS創英角ﾎﾟｯﾌﾟ体" size="60"><font color="#3366ff">U</font><font color="#ff1493">ni</font><font color="#30f060">kk</font><font color="gold">t</font><font color="violet">le</font></font>
+    *@
+
+    <div class="c5">
+        @if (UserSetting.BackgroundColor(User, Context.Session) == BackgroundColor.White)
+        {
+            <img src="/img/a.png" width="300">
+        }
+        else
+        {
+            <img src="/img/b.png" width="300">
+        }
+    </div>
+
+    <p></p>
+
+    <form asp-controller="Home" asp-action="Search" method="get">
+        <div class="c5">
+            <input id="ClickSearchText" type="text" name="s" size="40">
+        </div>
+        <p></p>
+        <div class="c5">
+            <button id="ClickSearch" class="btn btn-primary" type="submit">Search</button>
+        </div>
+
+    </form>
+</div>
